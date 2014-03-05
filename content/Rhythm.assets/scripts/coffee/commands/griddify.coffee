@@ -6,11 +6,11 @@ griddify = (direction, spacing) ->
 
 		throw Error "direction '#{direction}' isn't in ['right', 'down', 'left', 'up']"
 
-	unless typeof spacing is 'string'
+	unless typeof spacing is 'string' or typeof spacing is 'number'
 
 		throw Error "spacing must be a string"
 
-	spacing = spacing.replace /^\s+/, ''
+	spacing = String(spacing).replace /^\s+/, ''
 	.replace /\s+$/, ''
 	.replace /\s+/, ' '
 
@@ -125,4 +125,6 @@ griddify = (direction, spacing) ->
 
 	return
 
-griddify 'down', '10 20 30'
+_.panel 'griddify', (args) ->
+
+	griddify args.direction, args.spacing
