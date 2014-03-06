@@ -689,13 +689,13 @@ CSInterface.prototype.getOSInformation = function()
 module.exports = CSInterface;
 
 },{}],2:[function(require,module,exports){
-var CSInterface, Direction, Form, Panel, ThemeHandler;
+var CSInterface, Form, Panel, Rotator, ThemeHandler;
 
 ThemeHandler = require('./ThemeHandler');
 
 CSInterface = require('./CSInterface');
 
-Direction = require('./widgets/Direction');
+Rotator = require('./widgets/Rotator');
 
 Form = require('./widgets/Form');
 
@@ -706,15 +706,15 @@ module.exports = Panel = (function() {
     window.__adobe_cep__.showDevTools();
     this.csi = new CSInterface;
     this.themeHandler = new ThemeHandler(this);
-    Direction.applyTo(this.rootNode);
-    Form.applyTo(this.rootNode);
+    Rotator.applyTo(this.rootNode, this);
+    Form.applyTo(this.rootNode, this);
   }
 
   return Panel;
 
 })();
 
-},{"./CSInterface":1,"./ThemeHandler":3,"./widgets/Direction":5,"./widgets/Form":6}],3:[function(require,module,exports){
+},{"./CSInterface":1,"./ThemeHandler":3,"./widgets/Form":5,"./widgets/Rotator":6}],3:[function(require,module,exports){
 var ThemeHandler, console,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
@@ -913,81 +913,13 @@ prependToEachLine = function(str, toPrepend) {
 };
 
 },{}],5:[function(require,module,exports){
-var Direction, console,
-  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-  __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-
-console = require('../console');
-
-module.exports = Direction = (function() {
-  function Direction(node) {
-    var o, options, _i, _len, _ref;
-    this.node = node;
-    this.rotate = __bind(this.rotate, this);
-    this.name = this.node.getAttribute('data-name') || 'direction';
-    options = this.node.getAttribute('data-options');
-    if ((options != null) && options.trim() !== '') {
-      this.options = [];
-      _ref = options.split(/\s*,\s*/);
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        o = _ref[_i];
-        if (o !== 'right' && o !== 'down' && o !== 'left' && o !== 'up') {
-          throw Error("Option '" + o + "' isn't supported for direction. Supported options: ['right', 'down', 'left', 'up']");
-        }
-        this.options.push(o);
-      }
-    } else {
-      this.options = ['right', 'down', 'left', 'up'];
-    }
-    this.node.classList.add('panel-input-direction');
-    this.input = document.createElement('input');
-    this.input.type = 'hidden';
-    this.input.name = this.name;
-    this.node.parentNode.appendChild(this.input);
-    this.set(this.node.getAttribute('data-default') || this.options[0]);
-    this.node.addEventListener('click', this.rotate);
-  }
-
-  Direction.prototype.set = function(to) {
-    if (__indexOf.call(this.options, to) < 0) {
-      throw Error("Option '" + to + "' isn't defined.");
-    }
-    if (this.current != null) {
-      this.node.classList.remove(this.current);
-    }
-    this.node.classList.add(to);
-    this.current = to;
-    this.input.value = to;
-    return this;
-  };
-
-  Direction.prototype.rotate = function() {
-    var newIndex;
-    newIndex = this.options.indexOf(this.current) + 1;
-    newIndex = newIndex % this.options.length;
-    this.set(this.options[newIndex]);
-    return this;
-  };
-
-  Direction.applyTo = function(root) {
-    var node, nodes, _i, _len;
-    nodes = root.querySelectorAll('[data-type="direction"]');
-    for (_i = 0, _len = nodes.length; _i < _len; _i++) {
-      node = nodes[_i];
-      new Direction(node);
-    }
-  };
-
-  return Direction;
-
-})();
-
-},{"../console":4}],6:[function(require,module,exports){
 var Form;
 
 module.exports = Form = (function() {
-  function Form(node) {
+  function Form(panel, node) {
+    this.panel = panel;
     this.node = node;
+    this.csi = this.panel.csi;
     this.node.addEventListener('submit', (function(_this) {
       return function(e) {
         e.preventDefault();
@@ -1009,33 +941,104 @@ module.exports = Form = (function() {
   };
 
   Form.prototype._wire = function(data) {
-    var action, e, matches, method, path;
+    var action, e, matches, method, src;
     action = this.node.action;
-    if (!(matches = action.match(/\#([a-zA-Z0-9\/\.\s\_\-]+)\:([a-zA-Z0-9\_]+)$/))) {
+    if (!(matches = action.match(/\#([a-zA-Z0-9\_]+)$/))) {
       throw Error("Couldn't parse action address '" + action + "'");
     }
-    path = matches[1];
-    method = matches[2];
+    method = matches[1];
     try {
-      _AdobeInvokeFunctionInScriptFile(path, '_panel', method, [data]);
+      src = "$.global._panels." + method + ("(" + data + ");");
+      console.log(src);
+      this.csi.evalScript(src, function(ret) {
+        return console.log(arguments);
+      });
     } catch (_error) {
       e = _error;
       console.log(e);
     }
   };
 
-  Form.applyTo = function(rootNode) {
+  Form.applyTo = function(rootNode, panel) {
     var form, _i, _len, _ref;
     _ref = rootNode.querySelectorAll('form');
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       form = _ref[_i];
       if (String(form.getAttribute('action')).match(/^#/)) {
-        new Form(form);
+        new Form(panel, form);
       }
     }
   };
 
   return Form;
+
+})();
+
+},{}],6:[function(require,module,exports){
+var Rotator,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+module.exports = Rotator = (function() {
+  function Rotator(node) {
+    var o, options, thingy, _i, _len, _ref;
+    this.node = node;
+    this.rotate = __bind(this.rotate, this);
+    console.log(this.node);
+    this.name = this.node.getAttribute('data-name');
+    options = this.node.getAttribute('data-options');
+    if (!((options != null) && options.trim() !== '')) {
+      throw Error("Rotator isn't supplied with data-options");
+    }
+    this.options = [];
+    _ref = options.split(/\s*,\s*/);
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      o = _ref[_i];
+      this.options.push(o);
+    }
+    this.node.classList.add('panel-input-rotator');
+    thingy = document.createElement('div');
+    thingy.classList.add('thingy');
+    this.node.appendChild(thingy);
+    this.input = document.createElement('input');
+    this.input.type = 'hidden';
+    this.input.name = this.name;
+    this.node.parentNode.appendChild(this.input);
+    this.set(this.node.getAttribute('data-default') || this.options[0]);
+    this.node.addEventListener('click', this.rotate);
+  }
+
+  Rotator.prototype.set = function(to) {
+    if (__indexOf.call(this.options, to) < 0) {
+      throw Error("Option '" + to + "' isn't defined.");
+    }
+    if (this.current != null) {
+      this.node.classList.remove(this.current);
+    }
+    this.node.classList.add(to);
+    this.current = to;
+    this.input.value = to;
+    return this;
+  };
+
+  Rotator.prototype.rotate = function() {
+    var newIndex;
+    newIndex = this.options.indexOf(this.current) + 1;
+    newIndex = newIndex % this.options.length;
+    this.set(this.options[newIndex]);
+    return this;
+  };
+
+  Rotator.applyTo = function(root) {
+    var node, nodes, _i, _len;
+    nodes = root.querySelectorAll('[data-type="rotator"]');
+    for (_i = 0, _len = nodes.length; _i < _len; _i++) {
+      node = nodes[_i];
+      new Rotator(node);
+    }
+  };
+
+  return Rotator;
 
 })();
 

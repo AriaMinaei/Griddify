@@ -1,8 +1,8 @@
 *.bat
 .htaccess
 
-content/Rhythm.assets/scripts/js
-content/Rhythm.assets/scripts/dist
+scripts/js
+scripts/dist
 node_modules
 pg
 xeno/**

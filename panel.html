@@ -9,31 +9,31 @@
 
 <section>
 
-	<form action="#scripts/dist/griddify.jsx:griddify">
+	<form action="#griddify">
 
 	<div>
 
-		<input type="text" name="spacing" placeholder="Spacing" class="big">
+		<input type="text" name="spacing" placeholder="Spacing" class="big" value="">
 
-		<div data-type="direction" data-options="right, down, left, up" data-name="direction"></div>
+		<div data-type="rotator" data-options="right, down, left, up" data-name="direction" class="direction"></div>
 
 		<button>Griddify</button>
 
 	</div>
 
 	</form>
+<hr>
 
 </section>
-
 <section>
 
-	<form action="#scripts/dist/divide.jsg:divide">
+	<form action="#divide">
 
 	<div>
 
-		<input type="text" name="divisions" placeholder="Divisions" class="big">
+		<input type="text" name="divisions" placeholder="Divisions" class="big" value="4">
 
-		<div data-type="orientation" data-options="vertical, horizontal, both" data-name="orientation"></div>
+		<div data-type="rotator" data-options="vertical, horizontal, both" data-name="orientation" class="orientation"></div>
 
 		<button>Divide</button>
 

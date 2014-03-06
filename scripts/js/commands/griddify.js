@@ -2,7 +2,7 @@ var griddify, _;
 
 _ = require('photoshopjs-core');
 
-griddify = function(direction, spacing) {
+module.exports = griddify = function(direction, spacing) {
   var add, b, bounds, cur, doc, domDoc, guides, gutter, gutters, i, max, method, reached, start, _i, _j, _k, _len, _len1, _len2;
   if (direction !== 'right' && direction !== 'down' && direction !== 'left' && direction !== 'up') {
     throw Error("direction '" + direction + "' isn't in ['right', 'down', 'left', 'up']");

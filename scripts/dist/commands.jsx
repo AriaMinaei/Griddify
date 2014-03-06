@@ -81,19 +81,23 @@
   module.exports = PanelHelper = (function() {
     function PanelHelper(_core, panelName, cb) {
       this._core = _core;
-      if (this._core.global._panel == null) {
-        this._core.global._panel = {};
+      if (this._core.global._panels == null) {
+        this._core.global._panels = {};
       }
-      this._core.global._panel[panelName] = function(received) {
-        var run;
+      this._core.global._panels[panelName] = function(args) {
+        var error, ret, run;
         run = function() {
-          var args;
           console.useAlert();
-          args = JSON.parse(received[0]);
           cb(args);
           return console.useLog();
         };
-        return run();
+        try {
+          ret = run();
+          return "ok;" + ret;
+        } catch (_error) {
+          error = _error;
+          return "er;" + console._inspectSingle(error);
+        }
       };
     }
 
@@ -653,11 +657,97 @@
 }).call(this);
 
 },{}],14:[function(require,module,exports){
+var _;
+
+_ = require('photoshopjs-core');
+
+require('./griddify');
+
+require('./divide');
+
+},{"./divide":15,"./griddify":16,"photoshopjs-core":2}],15:[function(require,module,exports){
+var divide, _;
+
+_ = require('photoshopjs-core');
+
+module.exports = divide = function(orientation, divisions) {
+  var add, b, bounds, d, doc, domDoc, horizontal, i, vertical, _i, _len;
+  if (orientation !== 'vertical' && orientation !== 'horizontal' && orientation !== 'both') {
+    throw Error("orientation '" + orientation + "' isn't in ['vertical', 'horizontal', 'both']");
+  }
+  if (!(typeof divisions === 'string' || typeof divisions === 'number')) {
+    throw Error("divisions must be a string");
+  }
+  divisions = String(divisions).replace(/^\s+/, '').replace(/\s+$/, '');
+  if (!divisions.match(/^[0-9]+$/)) {
+    throw Error("Divisions must be a number. Given: '" + divisions + "'");
+  }
+  d = parseInt(divisions);
+  if (d === 0) {
+    throw Error("Wrong value for divisions: '" + divisions + "'");
+  }
+  divisions = d;
+  doc = _.docs.active;
+  try {
+    domDoc = doc.asDom();
+  } catch (_error) {
+    throw Error("No document seems to be open");
+  }
+  try {
+    bounds = domDoc.selection.bounds;
+  } catch (_error) {
+    bounds = [0, 0, domDoc.width, domDoc.height];
+  }
+  for (i = _i = 0, _len = bounds.length; _i < _len; i = ++_i) {
+    b = bounds[i];
+    if (b instanceof UnitValue) {
+      bounds[i] = b.value;
+    }
+  }
+  vertical = function() {
+    var from, method, to;
+    from = bounds[0];
+    to = bounds[2];
+    method = 'addVertical';
+    return add(from, to, method);
+  };
+  horizontal = function() {
+    var from, method, to;
+    from = bounds[1];
+    to = bounds[3];
+    method = 'addHorizontal';
+    return add(from, to, method);
+  };
+  add = function(from, to, method) {
+    var cur, len, piece, _j;
+    len = to - from;
+    piece = len / (divisions + 1);
+    cur = from;
+    for (i = _j = 1; 1 <= divisions ? _j <= divisions : _j >= divisions; i = 1 <= divisions ? ++_j : --_j) {
+      cur += piece;
+      doc.guides[method](cur);
+    }
+  };
+  if (orientation === 'vertical') {
+    vertical();
+  } else if (orientation === 'horizontal') {
+    horizontal();
+  } else {
+    vertical();
+    horizontal();
+  }
+};
+
+_.panel('divide', function(args) {
+  return divide(args.orientation, args.divisions);
+});
+
+},{"photoshopjs-core":2}],16:[function(require,module,exports){
 var griddify, _;
 
 _ = require('photoshopjs-core');
 
-griddify = function(direction, spacing) {
+module.exports = griddify = function(direction, spacing) {
   var add, b, bounds, cur, doc, domDoc, guides, gutter, gutters, i, max, method, reached, start, _i, _j, _k, _len, _len1, _len2;
   if (direction !== 'right' && direction !== 'down' && direction !== 'left' && direction !== 'up') {
     throw Error("direction '" + direction + "' isn't in ['right', 'down', 'left', 'up']");
