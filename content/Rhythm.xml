@@ -2,7 +2,7 @@
 <gpc defaultLocale="en_US" version="3" keySequence="5" currentLocale="en_US">
   <product appid="PHSP" version="13" name="Photoshop CS6"/>
   <target id="PHSP-13"/>
-  <ConfiguratorPanel name="Rhythm" width="255" height="45" minHeight="45" minWidth="255" init="doInit" close="doClose" persistent="false" extensionId="com.configurator.Rhythm" extensionVersion="1.0.0" menuName="Rhythm" flyoutMenuAbout="$$$/Configurator/FlyoutMenu/about">
+  <ConfiguratorPanel name="Rhythm" width="255" height="90" minHeight="45" minWidth="255" init="doInit" close="doClose" persistent="false" extensionId="com.configurator.Rhythm" extensionVersion="1.0.0" menuName="Rhythm" flyoutMenuAbout="$$$/Configurator/FlyoutMenu/about">
     <onInit><![CDATA[]]></onInit>
     <aboutBox>
       <![CDATA[A lightweight photoshop panel to control guides.
