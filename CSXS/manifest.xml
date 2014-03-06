@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionManifest Version="4.0" ExtensionBundleId="com.gelobi.rhythm" ExtensionBundleVersion="1.0.0"
+		ExtensionBundleName="Rhythm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ExtensionList>
+		<Extension Id="com.gelobi.rhythm" Version="1.0" />
+	</ExtensionList>
+	<ExecutionEnvironment>
+		<HostList>
+            <!-- Uncomment Host tags according to the apps you want your panel to support -->
+            <!-- Photoshop -->
+            <Host Name="PHXS" Version="[14.0,14.9]" />
+            <Host Name="PHSP" Version="[14.0,14.9]" />
+            <!-- Illustrator -->
+            <!-- <Host Name="ILST" Version="[17.0,17.9]" /> -->
+            <!-- InDesign -->
+            <!-- <Host Name="IDSN" Version="[9.1,10.0]" /> -->
+            <!-- Premiere -->
+            <!-- <Host Name="PPRO" Version="[7.0,7.9]" /> -->
+            <!-- PRELUDE -->
+            <!-- <Host Name="PRLD" Version="[2.0,2.9]" />   -->
+            <!-- FLASH Pro -->
+            <!-- <Host Name="FLPR" Version="[13.1,13.9]" /> -->
+		</HostList>
+		<LocaleList>
+			<Locale Code="All" />
+		</LocaleList>
+		<RequiredRuntimeList>
+			<RequiredRuntime Name="CSXS" Version="4.0" />
+		</RequiredRuntimeList>
+	</ExecutionEnvironment>
+	<DispatchInfoList>
+		<Extension Id="com.gelobi.rhythm">
+			<DispatchInfo >
+				<Resources>
+				<MainPath>./panel.html</MainPath>
+				<ScriptPath>./scripts/dist/commands.jsx</ScriptPath>
+				</Resources>
+				<Lifecycle>
+					<AutoVisible>true</AutoVisible>
+				</Lifecycle>
+				<UI>
+					<Type>Panel</Type>
+					<Menu>Rhythm</Menu>
+					<Geometry>
+						<Size>
+							<Height>90</Height>
+							<Width>255</Width>
+						</Size>
+					</Geometry>
+				</UI>
+			</DispatchInfo>
+		</Extension>
+	</DispatchInfoList>
+</ExtensionManifest>

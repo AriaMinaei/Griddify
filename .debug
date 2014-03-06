@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionList>
+    <Extension Id="com.gelobi.rhythm">
+        <HostList>
+
+            <!-- Comment Host tags according to the apps you want your panel to support -->
+
+            <!-- Photoshop -->
+            <Host Name="PHXS" Port="8095"/>
+
+            <!-- Illustrator -->
+            <!-- <Host Name="ILST" Port="8088"/> -->
+
+            <!-- InDesign -->
+            <!-- <Host Name="IDSN" Port="8088" /> -->
+
+            <!-- Premiere -->
+            <!-- <Host Name="PPRO" Port="8088" /> -->
+
+            <!-- PRELUDE -->
+            <!-- <Host Name="PRLD" Port="8088" /> -->
+
+            <!-- FLASH Pro -->
+            <!-- <Host Name="FLPR" Port="8088" /> -->
+
+        </HostList>
+    </Extension>
+</ExtensionList>
