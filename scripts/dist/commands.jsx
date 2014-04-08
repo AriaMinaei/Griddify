@@ -665,7 +665,9 @@ require('./griddify');
 
 require('./divide');
 
-},{"./divide":15,"./griddify":16,"photoshopjs-core":2}],15:[function(require,module,exports){
+require('./wrap');
+
+},{"./divide":15,"./griddify":16,"./wrap":17,"photoshopjs-core":2}],15:[function(require,module,exports){
 var divide, _;
 
 _ = require('photoshopjs-core');
@@ -838,5 +840,88 @@ module.exports = griddify = function(direction, spacing) {
 _.panel('griddify', function(args) {
   return griddify(args.direction, args.spacing);
 });
+
+},{"photoshopjs-core":2}],17:[function(require,module,exports){
+var wrap, _;
+
+_ = require('photoshopjs-core');
+
+module.exports = wrap = function(orientation, spacing) {
+  var add, b, bounds, doc, domDoc, gutter, gutters, horizontal, i, vertical, _i, _j, _len, _len1;
+  if (orientation !== 'vertical' && orientation !== 'horizontal' && orientation !== 'both') {
+    throw Error("orientation '" + orientation + "' isn't in ['vertical', 'horizontal', 'both']");
+  }
+  if (!(typeof spacing === 'string' || typeof spacing === 'number')) {
+    throw Error("spacing must be a string");
+  }
+  spacing = String(spacing).replace(/^\s+/, '').replace(/\s+$/, '').replace(/\s+/, ' ');
+  if (!spacing.match(/[0-9]+/)) {
+    throw Error("There are no numbers in spacing");
+  }
+  if (!spacing.match(/^[\-0-9\s\.]+$/)) {
+    throw Error("Wrong value for spacing");
+  }
+  gutters = spacing.split(' ');
+  for (i = _i = 0, _len = gutters.length; _i < _len; i = ++_i) {
+    gutter = gutters[i];
+    if (isNaN(gutter)) {
+      throw Error("gutter '" + gutter + "' is not a number");
+    }
+    gutter = parseFloat(gutter);
+    gutters[i] = gutter;
+  }
+  doc = _.docs.active;
+  try {
+    domDoc = doc.asDom();
+  } catch (_error) {
+    throw Error("No document seems to be open");
+  }
+  try {
+    bounds = domDoc.selection.bounds;
+  } catch (_error) {
+    bounds = [0, 0, domDoc.width, domDoc.height];
+  }
+  for (i = _j = 0, _len1 = bounds.length; _j < _len1; i = ++_j) {
+    b = bounds[i];
+    if (b instanceof UnitValue) {
+      bounds[i] = b.value;
+    }
+  }
+  vertical = function() {
+    add(bounds[0], true, 'addVertical');
+    return add(bounds[2], false, 'addVertical');
+  };
+  horizontal = function() {
+    add(bounds[1], true, 'addHorizontal');
+    return add(bounds[3], false, 'addHorizontal');
+  };
+  add = function(from, asc, method) {
+    var cur, _k, _len2;
+    cur = from;
+    for (_k = 0, _len2 = gutters.length; _k < _len2; _k++) {
+      gutter = gutters[_k];
+      if (asc) {
+        cur += gutter;
+      } else {
+        cur -= gutter;
+      }
+      doc.guides[method](cur);
+    }
+  };
+  if (orientation === 'vertical') {
+    vertical();
+  } else if (orientation === 'horizontal') {
+    horizontal();
+  } else {
+    vertical();
+    horizontal();
+  }
+};
+
+_.panel('wrap', function(args) {
+  return wrap(args.orientation, args.spacing);
+});
+
+wrap('both', '15 -20');
 
 },{"photoshopjs-core":2}]},{},[14])

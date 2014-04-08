@@ -703,7 +703,11 @@ module.exports = Panel = (function() {
   function Panel(panelName, rootNode) {
     this.panelName = panelName;
     this.rootNode = rootNode != null ? rootNode : document.body;
-    window.__adobe_cep__.showDevTools();
+    this.rootNode.addEventListener('click', function(e) {
+      if (e.ctrlKey) {
+        window.__adobe_cep__.showDevTools();
+      }
+    });
     this.csi = new CSInterface;
     this.themeHandler = new ThemeHandler(this);
     Rotator.applyTo(this.rootNode, this);
@@ -981,10 +985,9 @@ var Rotator,
 
 module.exports = Rotator = (function() {
   function Rotator(node) {
-    var o, options, thingy, _i, _len, _ref;
+    var i, o, options, thingy, _i, _j, _len, _ref;
     this.node = node;
     this.rotate = __bind(this.rotate, this);
-    console.log(this.node);
     this.name = this.node.getAttribute('data-name');
     options = this.node.getAttribute('data-options');
     if (!((options != null) && options.trim() !== '')) {
@@ -997,9 +1000,12 @@ module.exports = Rotator = (function() {
       this.options.push(o);
     }
     this.node.classList.add('panel-input-rotator');
-    thingy = document.createElement('div');
-    thingy.classList.add('thingy');
-    this.node.appendChild(thingy);
+    for (i = _j = 0; _j <= 6; i = ++_j) {
+      thingy = document.createElement('div');
+      thingy.classList.add('thingy');
+      thingy.classList.add('n' + i);
+      this.node.appendChild(thingy);
+    }
     this.input = document.createElement('input');
     this.input.type = 'hidden';
     this.input.name = this.name;
