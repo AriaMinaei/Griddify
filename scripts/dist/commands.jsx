@@ -739,9 +739,9 @@ module.exports = divide = function(orientation, divisions) {
   add = function(from, to, method) {
     var cur, len, piece, _j;
     len = to - from;
-    piece = len / (divisions + 1);
+    piece = len / divisions;
     cur = from;
-    for (i = _j = 1; 1 <= divisions ? _j <= divisions : _j >= divisions; i = 1 <= divisions ? ++_j : --_j) {
+    for (i = _j = 1; 1 <= divisions ? _j < divisions : _j > divisions; i = 1 <= divisions ? ++_j : --_j) {
       cur += piece;
       doc.guides[method](cur);
     }

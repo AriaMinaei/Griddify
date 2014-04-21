@@ -69,11 +69,11 @@ module.exports = divide = (orientation, divisions) ->
 
 		len = to - from
 
-		piece = len / (divisions + 1)
+		piece = len / (divisions)
 
 		cur = from
 
-		for i in [1..divisions]
+		for i in [1...divisions]
 
 			cur += piece
 
