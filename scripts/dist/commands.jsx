@@ -80,22 +80,38 @@
 
   module.exports = PanelHelper = (function() {
     function PanelHelper(_core, panelName, cb) {
+      var core;
       this._core = _core;
       if (this._core.global._panels == null) {
         this._core.global._panels = {};
       }
+      core = this._core;
       this._core.global._panels[panelName] = function(args) {
-        var error, ret, run;
+        var doc, domDoc, error, msg, result, run;
+        result = null;
         run = function() {
           console.useAlert();
-          cb(args);
+          result = cb(args);
           return console.useLog();
         };
         try {
-          ret = run();
-          return "ok;" + ret;
+          try {
+            doc = core.docs.active;
+            domDoc = doc.asDom();
+          } catch (_error) {}
+          if (domDoc != null) {
+            domDoc.suspendHistory(panelName, 'run()');
+          } else {
+            run();
+          }
+          return "ok;" + result;
         } catch (_error) {
           error = _error;
+          msg = error;
+          if (error.message != null) {
+            msg = error.message;
+          }
+          alert(msg);
           return "er;" + console._inspectSingle(error);
         }
       };
@@ -921,7 +937,5 @@ module.exports = wrap = function(orientation, spacing) {
 _.panel('wrap', function(args) {
   return wrap(args.orientation, args.spacing);
 });
-
-wrap('both', '15 -20');
 
 },{"photoshopjs-core":2}]},{},[14])

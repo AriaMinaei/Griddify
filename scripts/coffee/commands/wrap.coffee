@@ -107,5 +107,3 @@ module.exports = wrap = (orientation, spacing) ->
 _.panel 'wrap', (args) ->
 
 	wrap args.orientation, args.spacing
-
-wrap 'both', '15 -20'

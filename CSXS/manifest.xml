@@ -40,11 +40,11 @@
 				</Lifecycle>
 				<UI>
 					<Type>Panel</Type>
-					<Menu>Rhythm</Menu>
+					<Menu>Griddify</Menu>
 					<Geometry>
 						<Size>
-							<Height>90</Height>
-							<Width>600</Width>
+							<Height>127</Height>
+							<Width>247</Width>
 						</Size>
 					</Geometry>
 				</UI>

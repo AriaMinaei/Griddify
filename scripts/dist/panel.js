@@ -704,7 +704,7 @@ module.exports = Panel = (function() {
     this.panelName = panelName;
     this.rootNode = rootNode != null ? rootNode : document.body;
     this.rootNode.addEventListener('click', function(e) {
-      if (e.ctrlKey) {
+      if (e.ctrlKey && e.shiftKey) {
         window.__adobe_cep__.showDevTools();
       }
     });
