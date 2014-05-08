@@ -367,9 +367,11 @@
 
 },{"../com":5}],10:[function(require,module,exports){
 (function() {
-  var Document, GuidesManager;
+  var Document, GuidesManager, desc, exec, _ref;
 
   GuidesManager = require('./document/GuidesManager');
+
+  _ref = require('../com'), desc = _ref.desc, exec = _ref.exec;
 
   module.exports = Document = (function() {
     function Document(_docs) {
@@ -414,7 +416,7 @@
 
 }).call(this);
 
-},{"./document/GuidesManager":11}],11:[function(require,module,exports){
+},{"../com":5,"./document/GuidesManager":11}],11:[function(require,module,exports){
 (function() {
   var GuidesManager, charToType, desc, exec, stringToChar, stringToType, typeToString, _ref,
     __slice = [].slice;

@@ -686,10 +686,16 @@ CSInterface.prototype.getOSInformation = function()
 };
 
 ;
+CSInterface.SystemPath = SystemPath;
+
 module.exports = CSInterface;
 
 },{}],2:[function(require,module,exports){
-var CSInterface, Form, Panel, Rotator, ThemeHandler;
+var CSInterface, Form, OpenInBrowserHelper, Panel, Rotator, ThemeHandler, UpdateNotifier;
+
+OpenInBrowserHelper = require('./widgets/OpenInBrowserHelper');
+
+UpdateNotifier = require('./panel/UpdateNotifier');
 
 ThemeHandler = require('./ThemeHandler');
 
@@ -712,13 +718,15 @@ module.exports = Panel = (function() {
     this.themeHandler = new ThemeHandler(this);
     Rotator.applyTo(this.rootNode, this);
     Form.applyTo(this.rootNode, this);
+    OpenInBrowserHelper.applyTo(this.rootNode, this);
+    this.updateNotifier = new UpdateNotifier(this);
   }
 
   return Panel;
 
 })();
 
-},{"./CSInterface":1,"./ThemeHandler":3,"./widgets/Form":5,"./widgets/Rotator":6}],3:[function(require,module,exports){
+},{"./CSInterface":1,"./ThemeHandler":3,"./panel/UpdateNotifier":5,"./widgets/Form":6,"./widgets/OpenInBrowserHelper":7,"./widgets/Rotator":8}],3:[function(require,module,exports){
 var ThemeHandler, console,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
@@ -917,6 +925,71 @@ prependToEachLine = function(str, toPrepend) {
 };
 
 },{}],5:[function(require,module,exports){
+var UpdateNotifier,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+module.exports = UpdateNotifier = (function() {
+  function UpdateNotifier(panel) {
+    this.panel = panel;
+    this._close = __bind(this._close, this);
+  }
+
+  UpdateNotifier.prototype.init = function(options) {
+    this.name = options.name;
+    this.version = options.version;
+    this.hub = options.hub;
+    this.channel = options.channel;
+    this.updateUrl = options.updateUrl;
+    this.request = new XMLHttpRequest;
+    this.request.onreadystatechange = (function(_this) {
+      return function() {
+        if (_this.request.readyState === 4) {
+          return _this._processResult(_this.request.responseText);
+        }
+      };
+    })(this);
+    this.request.open('GET', this.hub, true);
+    return this.request.send(null);
+  };
+
+  UpdateNotifier.prototype._processResult = function(response) {
+    var json;
+    json = JSON.parse(response);
+    if (json.updateAvailable === 'yes') {
+      return this._considerShowingUpdateNotification();
+    }
+  };
+
+  UpdateNotifier.prototype._considerShowingUpdateNotification = function() {
+    return this._showUpdateNotification();
+  };
+
+  UpdateNotifier.prototype._showUpdateNotification = function() {
+    this.node = document.createElement('div');
+    this.node.className = "serverNotification visible";
+    document.body.appendChild(this.node);
+    this.linkNode = document.createElement('a');
+    this.linkNode.className = "serverNotification-msg browse";
+    this.linkNode.href = this.updateUrl;
+    this.linkNode.innerHTML = 'New Version Available at ' + this.updateUrl.replace('http://', '');
+    this.node.appendChild(this.linkNode);
+    this.closeNode = document.createElement('button');
+    this.closeNode.className = "serverNotification-discard";
+    this.closeNode.innerHTML = "Remind Me Later";
+    this.node.appendChild(this.closeNode);
+    this.linkNode.addEventListener('click', this._close);
+    return this.closeNode.addEventListener('click', this._close);
+  };
+
+  UpdateNotifier.prototype._close = function() {
+    return this.node.classList.remove('visible');
+  };
+
+  return UpdateNotifier;
+
+})();
+
+},{}],6:[function(require,module,exports){
 var Form;
 
 module.exports = Form = (function() {
@@ -978,7 +1051,48 @@ module.exports = Form = (function() {
 
 })();
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
+var OpenInBrowserHelper;
+
+module.exports = OpenInBrowserHelper = (function() {
+  OpenInBrowserHelper.applyTo = function(node, panel) {
+    return new OpenInBrowserHelper(node, panel);
+  };
+
+  function OpenInBrowserHelper(node, panel) {
+    this.node = node;
+    this.panel = panel;
+    node.addEventListener('click', (function(_this) {
+      return function(e) {
+        var el;
+        el = e.target;
+        if (el.tagName === 'A' && el.classList.contains('browse')) {
+          e.preventDefault();
+          return _this.browse(el.href, panel);
+        }
+      };
+    })(this));
+  }
+
+  OpenInBrowserHelper.prototype.browse = function(url) {
+    var isWindows, processPath, rootDir;
+    isWindows = window.navigator.platform.toLowerCase().indexOf("win") > -1;
+    rootDir = "/";
+    if (isWindows) {
+      rootDir = this.panel.csi.getSystemPath("commonFiles").substring(0, 3);
+    }
+    processPath = "/usr/bin/open";
+    if (isWindows) {
+      processPath = rootDir + "Windows/explorer.exe";
+    }
+    return window.cep.process.createProcess(processPath, url);
+  };
+
+  return OpenInBrowserHelper;
+
+})();
+
+},{}],8:[function(require,module,exports){
 var Rotator,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
@@ -1048,11 +1162,47 @@ module.exports = Rotator = (function() {
 
 })();
 
-},{}],7:[function(require,module,exports){
-var Panel, panel;
+},{}],9:[function(require,module,exports){
+module.exports={
+  "name": "griddify",
+  "version": "0.0.0",
+  "description": "A lightweight photoshop panel to make guides and grids",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "coffee scripts/coffee/build/build.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AriaMinaei/photoshopjs-rhythm.git"
+  },
+  "keywords": [
+    "photoshop"
+  ],
+  "author": "Aria Minaei",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AriaMinaei/photoshopjs-rhythm/issues"
+  },
+  "dependencies": {
+
+  }
+}
+
+},{}],10:[function(require,module,exports){
+var Panel, name, panel, version, _ref;
 
 Panel = require('photoshopjs-panel');
 
-panel = new Panel('Rhythm');
+panel = new Panel('Griddify');
 
-},{"photoshopjs-panel":2}]},{},[7])
+_ref = require('../../../package.json'), name = _ref.name, version = _ref.version;
+
+panel.updateNotifier.init({
+  name: name,
+  version: version,
+  hub: "http://localhost/open-source/photoshopjs/hub/",
+  updateUrl: "http://gelobi.org/griddify"
+});
+
+},{"../../../package.json":9,"photoshopjs-panel":2}]},{},[10])

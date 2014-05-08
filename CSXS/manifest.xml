@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ExtensionManifest Version="4.0" ExtensionBundleId="com.gelobi.rhythm" ExtensionBundleVersion="1.0.0"
-		ExtensionBundleName="Rhythm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ExtensionManifest Version="4.0" ExtensionBundleId="com.gelobi.griddify" ExtensionBundleVersion="1.0.0"
+		ExtensionBundleName="Griddify" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
 	<ExtensionList>
-		<Extension Id="com.gelobi.rhythm" Version="1.0" />
+		<Extension Id="com.gelobi.griddify" Version="1.0" />
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
@@ -29,7 +30,7 @@
 		</RequiredRuntimeList>
 	</ExecutionEnvironment>
 	<DispatchInfoList>
-		<Extension Id="com.gelobi.rhythm">
+		<Extension Id="com.gelobi.griddify">
 			<DispatchInfo >
 				<Resources>
 				<MainPath>./panel.html</MainPath>
@@ -43,9 +44,14 @@
 					<Menu>Griddify</Menu>
 					<Geometry>
 						<Size>
-							<Height>130</Height>
+							<Height>128</Height>
 							<Width>247</Width>
 						</Size>
+
+						<MinSize>
+							<Height>128</Height>
+							<Width>247</Width>
+						</MinSize>
 					</Geometry>
 				</UI>
 			</DispatchInfo>
