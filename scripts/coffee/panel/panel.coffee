@@ -14,4 +14,4 @@ panel.updateNotifier.init
 
 	updateUrl: "http://gelobi.org/griddify"
 
-panel.setPersistency on, "com.pixana.griddify"
+panel.setPersistency on, "Griddify"
