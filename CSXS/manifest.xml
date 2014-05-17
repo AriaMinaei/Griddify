@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ExtensionManifest Version="4.0" ExtensionBundleId="com.gelobi.griddify" ExtensionBundleVersion="1.0.0"
+<ExtensionManifest Version="4.0" ExtensionBundleId="com.pixana.griddify" ExtensionBundleVersion="1.0.0"
 		ExtensionBundleName="Griddify" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<ExtensionList>
-		<Extension Id="com.gelobi.griddify" Version="1.0" />
+		<Extension Id="com.pixana.griddify" Version="1.0" />
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
@@ -30,7 +30,7 @@
 		</RequiredRuntimeList>
 	</ExecutionEnvironment>
 	<DispatchInfoList>
-		<Extension Id="com.gelobi.griddify">
+		<Extension Id="com.pixana.griddify">
 			<DispatchInfo >
 				<Resources>
 				<MainPath>./panel.html</MainPath>

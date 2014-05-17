@@ -688,6 +688,8 @@ CSInterface.prototype.getOSInformation = function()
 ;
 CSInterface.SystemPath = SystemPath;
 
+CSInterface.CSEvent = CSEvent;
+
 module.exports = CSInterface;
 
 },{}],2:[function(require,module,exports){
@@ -721,6 +723,17 @@ module.exports = Panel = (function() {
     OpenInBrowserHelper.applyTo(this.rootNode, this);
     this.updateNotifier = new UpdateNotifier(this);
   }
+
+  Panel.prototype.setPersistency = function(isOn, id) {
+    var event;
+    if (isOn) {
+      event = new CSInterface.CSEvent("com.adobe.PhotoshopPersistent", "APPLICATION");
+    } else {
+      event = new CSInterface.CSEvent("com.adobe.PhotoshopUnPersistent", "APPLICATION");
+    }
+    event.extensionId = id;
+    return this.csi.dispatchEvent(event);
+  };
 
   return Panel;
 
@@ -1201,8 +1214,10 @@ _ref = require('../../../package.json'), name = _ref.name, version = _ref.versio
 panel.updateNotifier.init({
   name: name,
   version: version,
-  hub: "http://localhost/open-source/photoshopjs/hub/",
+  hub: "http://gelobi.org/griddify/updateHub/",
   updateUrl: "http://gelobi.org/griddify"
 });
+
+panel.setPersistency(true, "com.pixana.griddify");
 
 },{"../../../package.json":9,"photoshopjs-panel":2}]},{},[10])

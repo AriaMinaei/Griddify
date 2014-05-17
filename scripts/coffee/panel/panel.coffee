@@ -10,6 +10,8 @@ panel.updateNotifier.init
 
 	version: version
 
-	hub: "http://localhost/open-source/photoshopjs/hub/"
+	hub: "http://gelobi.org/griddify/updateHub/"
 
 	updateUrl: "http://gelobi.org/griddify"
+
+panel.setPersistency on, "com.pixana.griddify"

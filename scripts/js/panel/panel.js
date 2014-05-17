@@ -9,6 +9,8 @@ _ref = require('../../../package.json'), name = _ref.name, version = _ref.versio
 panel.updateNotifier.init({
   name: name,
   version: version,
-  hub: "http://localhost/open-source/photoshopjs/hub/",
+  hub: "http://gelobi.org/griddify/updateHub/",
   updateUrl: "http://gelobi.org/griddify"
 });
+
+panel.setPersistency(true, "com.pixana.griddify");
