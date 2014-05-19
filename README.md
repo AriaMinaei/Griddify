@@ -10,7 +10,7 @@ Firstly, thank you for wanting to contribute! If you have any features/improveme
 
 ## Development
 
-PRs are more than welcome! Griddify depends on [photoshopjs-core](https://github.com/pixana/photoshopjs-core) to command photoshop and also on [photoshopjs-panel](https://github.com/pixana/photoshopjs-panel) to create the interface of the panel. These projects currently only support the requirements of Griddify, and they'll be further developed as we work on Griddify and a couple of other Photoshop panels, which means if you wanna add a feature to Griddify, you probably gonna have to take a look at those too.
+PRs are more than welcome! Griddify depends on [photoshopjs-core](https://github.com/AriaMinaei/photoshopjs-core) to command photoshop and also on [photoshopjs-panel](https://github.com/AriaMinaei/photoshopjs-panel) to create the interface of the panel. These projects currently only support the requirements of Griddify, and they'll be further developed as we work on Griddify and a couple of other Photoshop panels, which means if you wanna add a feature to Griddify, you probably gonna have to take a look at those too.
 
 Here, I'll describe how you can develop griddify:
 
