@@ -36,20 +36,20 @@ You also need to enable the debug mode in Adobe applications. Quoting from this 
 > * On Mac, open the file ~/Library/Preferences/com.adobe.CSXS.4.plist and add a row with key PlayerDebugMode, of type String, and value 1.
 > * On Windows, open the registry key HKEY_CURRENT_USER/Software/Adobe/CSXS.4 and add a key named PlayerDebugMode, of type String, and value 1.
 
-Now, if everything has worked, when you restart Photoshop CC you should be able to see the panel in the window menu, uner extensions.
+Now, if everything has worked, when you restart Photoshop CC you should be able to see the panel in the `Window > Extensions` menu.
 
 #### Developing
 
 To watch the files for changes:
 ```
-In OSX: (Could someone please test this?)
+In OSX: (could someone please test this?)
 $ npm run watch
 
 In windows:
 $ npm run winwatch
 ```
 
-The extendscript stuff are in the `scripts/coffee/commands` directory.
+The extendscript stuff are in the `scripts/coffee/commands` directory and the script for the interface is in `scripts/coffee/panel/panel.coffee`.
 
 ## License
 
