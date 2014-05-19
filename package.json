@@ -1,25 +1,33 @@
 {
   "name": "griddify",
   "version": "0.0.0",
-  "description": "A lightweight photoshop panel to make guides and grids",
+  "description": "A tiny photoshop panel to make guides and grids",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "coffee scripts/coffee/build/build.coffee"
+    "prepublish": "cake build && compass compile styles",
+    "winwatch": "start/b jitter scripts/coffee scripts/js -b && start/b compass watch styles && start/b watchify scripts/js/panel/panel.js --path js --noparse=FILE --dg false -o scripts/dist/panel.js -v && start/b watchify scripts/js/commands/commands.js --path js --noparse=FILE --dg false -o scripts/dist/commands.jsx -v",
+    "watch": "jitter scripts/coffee scripts/js -b & compass watch styles & watchify scripts/js/panel/panel.js --path js --noparse=FILE --dg false -o scripts/dist/panel.js -v & watchify scripts/js/commands/commands.js --path js --noparse=FILE --dg false -o scripts/dist/commands.jsx -v"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AriaMinaei/photoshopjs-rhythm.git"
+    "url": "https://github.com/pixana/griddify.git"
   },
   "keywords": [
     "photoshop"
   ],
   "author": "Aria Minaei",
-  "license": "MIT",
+  "license": "GPL V3",
   "bugs": {
-    "url": "https://github.com/AriaMinaei/photoshopjs-rhythm/issues"
+    "url": "https://github.com/pixana/griddify/issues"
   },
   "dependencies": {
-
+    "photoshopjs-core": "~0.1.0-dev.1",
+    "photoshopjs-panel": "~0.1.0-dev.1"
+    },
+  "devDependencies": {
+    "browserify": "^4.1.5",
+    "coffee-script": "^1.7.1",
+    "jitter": "^1.3.0",
+    "watchify": "^0.10.1"
   }
 }
