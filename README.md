@@ -8,6 +8,10 @@ It's a tiny photoshop panel to make guides and grids. Download and see the tutor
 
 Firstly, thank you for wanting to contribute! If you have any features/improvements in mind, or if something isn't working, just open an [issue](./issues).
 
+## Compatibility with CS4/5/6
+
+We're working on a CS6 version, and it might be possible to get it working with CS4/5. Track the progress in [this issue](https://github.com/pixana/griddify/issues/4).
+
 ## Development
 
 PRs are more than welcome! Griddify depends on [photoshopjs-core](https://github.com/AriaMinaei/photoshopjs-core) to command photoshop and also on [photoshopjs-panel](https://github.com/AriaMinaei/photoshopjs-panel) to create the interface of the panel. These projects currently only support the requirements of Griddify, and they'll be further developed as we work on Griddify and a couple of other Photoshop panels, which means if you wanna add a feature to Griddify, you probably gonna have to take a look at those too.
