@@ -14,4 +14,6 @@ panel.updateNotifier.init
 
 	updateUrl: "http://gelobi.org/griddify"
 
-panel.setPersistency on, "Griddify"
+# This seems to completely mess up with the plugin's cache,
+# so I'm just gonna leave it off for now
+# panel.setPersistency on, "Griddify"

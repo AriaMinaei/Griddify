@@ -62,7 +62,6 @@ module.exports = griddify = (direction, spacing) ->
 
 			bounds[i] = b.value
 
-
 	if direction is 'right'
 
 		start = bounds[0]
