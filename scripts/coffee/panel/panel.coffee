@@ -10,7 +10,9 @@ panel.updateNotifier.init
 
 	version: version
 
-	hub: "http://gelobi.org/griddify/updateHub/"
+	channel: "beta"
+
+	hub: "http://gelobi.org/griddify/updateHub2/"
 
 	updateUrl: "http://gelobi.org/griddify"
 

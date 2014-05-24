@@ -1,7 +1,7 @@
 {
   "name": "griddify",
   "private": "true",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.3",
   "description": "A tiny photoshop panel to make guides and grids",
   "main": "index.js",
   "scripts": {
