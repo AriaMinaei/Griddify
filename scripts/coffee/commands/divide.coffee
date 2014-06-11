@@ -1,3 +1,4 @@
+parseDivisions = require './divide/parseDivisions'
 _ = require 'photoshopjs-core'
 
 module.exports = divide = (orientation, divisions) ->
@@ -6,24 +7,7 @@ module.exports = divide = (orientation, divisions) ->
 
 		throw Error "orientation '#{orientation}' isn't in ['vertical', 'horizontal', 'both']"
 
-	unless typeof divisions is 'string' or typeof divisions is 'number'
-
-		throw Error "divisions must be a string"
-
-	divisions = String(divisions).replace /^\s+/, ''
-	.replace /\s+$/, ''
-
-	unless divisions.match /^[0-9]+$/
-
-		throw Error "Divisions must be a number. Given: '#{divisions}'"
-
-	d = parseInt divisions
-
-	unless d isnt 0
-
-		throw Error "Wrong value for divisions: '#{divisions}'"
-
-	divisions = d
+	{divisions, gutters} = parseDivisions divisions
 
 	doc = _.docs.active
 
@@ -55,7 +39,7 @@ module.exports = divide = (orientation, divisions) ->
 		to = bounds[2]
 		method = 'addVertical'
 
-		add from, to, method
+		addSeries from, to, method
 
 	horizontal = ->
 
@@ -63,9 +47,9 @@ module.exports = divide = (orientation, divisions) ->
 		to = bounds[3]
 		method = 'addHorizontal'
 
-		add from, to, method
+		addSeries from, to, method
 
-	add = (from, to, method) ->
+	addSeries = (from, to, method) ->
 
 		len = to - from
 
@@ -77,7 +61,43 @@ module.exports = divide = (orientation, divisions) ->
 
 			cur += piece
 
-			doc.guides[method] cur
+			addSingle cur, method
+
+		return
+
+	addSingle = (at, method) ->
+
+		for p in positions
+
+			doc.guides[method] p + at
+
+		return
+
+	positions = []
+
+	do ->
+
+		if gutters.length is 0
+
+			positions.push 0
+
+			return
+
+		absolutes = [0]
+
+		cur = 0
+
+		for g in gutters
+
+			cur += g
+
+			absolutes.push cur
+
+		len = cur
+
+		for p in absolutes
+
+			positions.push p - (len / 2)
 
 		return
 
