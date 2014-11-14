@@ -10,7 +10,11 @@ Firstly, thank you for wanting to contribute! If you have any features/improveme
 
 ## Compatibility with CS4/5/6
 
-We're working on a CS6 version, and it might be possible to get it working with CS4/5. Track the progress in [this issue](https://github.com/pixana/griddify/issues/4).
+The CS6 version is ready. Unfortunately, I haven't found the time to familiarize myself with Adobe Flex (apparently, you can develop HTML extensions for older versions of Photoshop using Flex). If you can help me port Griddify to CS versions, please [let me know](./issues/4).
+
+## Manual Install
+
+IF you're having trouble installing Griddify on Photoshop CC 2014, there is a manual installation guide [here](./docs/manual-install.md).
 
 ## Development
 

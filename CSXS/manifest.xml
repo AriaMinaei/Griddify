@@ -8,8 +8,8 @@
 	<ExecutionEnvironment>
 		<HostList>
             <!-- Photoshop -->
-            <Host Name="PHXS" Version="14.0" />
-            <Host Name="PHSP" Version="14.0" />
+            <Host Name="PHXS" Version="[14.0,15.9]" />
+            <Host Name="PHSP" Version="[14.0,15.9]" />
 
 		</HostList>
 		<LocaleList>
