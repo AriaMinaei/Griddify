@@ -14,7 +14,7 @@ The CS6 version is ready. Unfortunately, I haven't found the time to familiarize
 
 ## Manual Install
 
-IF you're having trouble installing Griddify on Photoshop CC 2014, there is a manual installation guide [here](./docs/manual-install.md).
+If you're having trouble installing Griddify on Photoshop CC 2014, there is a manual installation guide [here](./docs/manual-install.md).
 
 ## Development
 
