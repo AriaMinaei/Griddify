@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ExtensionManifest Version="4.0" ExtensionBundleId="Griddify" ExtensionBundleVersion="1.1.0"
+<ExtensionManifest Version="5.0" ExtensionBundleId="Griddify" ExtensionBundleVersion="1.1.0"
 		ExtensionBundleName="Griddify" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<ExtensionList>
@@ -8,8 +8,8 @@
 	<ExecutionEnvironment>
 		<HostList>
             <!-- Photoshop -->
-            <Host Name="PHXS" Version="[14.0,15.9]" />
-            <Host Name="PHSP" Version="[14.0,15.9]" />
+            <Host Name="PHXS" Version="[14.0,99.9]" />
+            <Host Name="PHSP" Version="[14.0,99.9]" />
 
 		</HostList>
 		<LocaleList>
