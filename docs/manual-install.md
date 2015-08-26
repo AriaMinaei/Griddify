@@ -1,6 +1,6 @@
-# Manual install on Photoshop CC 2014
+# Manual install on Photoshop CC
 
-Many people have been having problem installing Griddify on CC 2014. This is an alternative way to install Griddify on CC 2014 without using Adobe Extension Manager.
+Many people have been having problem installing Griddify on Photoshop CC. This is an alternative way to install Griddify on CC without using Adobe Extension Manager.
 
 ## Enabling manual installation
 
@@ -9,14 +9,18 @@ There is this thing in CC apps called the "debug mode" that you need to enable b
 ### On Windows:
 
 1. Choose **Run** from the Windows Start menu, and enter `regedit` to open the registry editor.
-2. Navigate to the key `HKEY_CURRENT_USER\Software\Adobe\CSXS.5`
+2. Navigate to the key:
+  - For CC 2014: `HKEY_CURRENT_USER\Software\Adobe\CSXS.5`
+  - For CC 2015: `HKEY_CURRENT_USER\Software\Adobe\CSXS.6`
 3. Choose Edit > New > String Value. Enter the Name key `PlayerDebugMode`, and set Data to `1` to enable debug mode.
 4. Close the registry editor
 
 ### On OSX:
 
 1. Navigate to the folder `<user>/Library/Preferences`
-2. Find the property list (PLIST) file: `com.adobe.CSXS.5.plist`
+2. Find the property list (PLIST) file:
+  - For CC 2014: `com.adobe.CSXS.5.plist`
+  - For CC 2015: `com.adobe.CSXS.6.plist`
 3. Open this file with the XCode Property List editor, or the PlistBuddy command-line tool
 4. Change value for the key `PlayerDebugMode` to `1` to enable debug mode as described below, and save the file.
 
@@ -32,7 +36,7 @@ Open Xcode (Normally found in the Applications folder) and choose `File > Open`.
 and click **Open**. If the `PlayerDebugMode` key already exists make sure its value is set to `1`. If not:
 
 1. Hover over any entry and click Add (+).
-2. Enter `PlayeDebugMode` as the key name.
+2. Enter `PlayerDebugMode` as the key name.
 3. Set the key type to “String”.
 4. Enter `1` as the value.
 
