@@ -5,9 +5,7 @@
   "description": "A tiny photoshop panel to make guides and grids",
   "main": "index.js",
   "scripts": {
-    "prepublish": "cake build && compass compile styles",
-    "winwatch": "start/b jitter scripts/coffee scripts/js -b && start/b compass watch styles && start/b watchify scripts/js/panel/panel.js --path js --noparse=FILE --dg false -o scripts/dist/panel.js -v && start/b watchify scripts/js/commands/commands.js --path js --noparse=FILE --dg false -o scripts/dist/commands.jsx -v",
-    "watch": "jitter scripts/coffee scripts/js -b & compass watch styles & watchify scripts/js/panel/panel.js --path js --noparse=FILE --dg false -o scripts/dist/panel.js -v & watchify scripts/js/commands/commands.js --path js --noparse=FILE --dg false -o scripts/dist/commands.jsx -v"
+    "dev": "webpack --watch --config ./build-tools/webpack-dev.js --colors --progress"
   },
   "repository": {
     "type": "git",
@@ -23,12 +21,22 @@
   },
   "dependencies": {
     "photoshopjs-core": "~0.1.0-dev.1",
-    "photoshopjs-panel": "~0.1.0-dev.1"
-    },
+    "semver": "^5.1.0"
+  },
   "devDependencies": {
+    "autoprefixer": "^6.1.2",
     "browserify": "^4.1.5",
-    "coffee-script": "^1.7.1",
+    "coffee-loader": "^0.7.2",
+    "coffee-script": "^1.10.0",
+    "css-loader": "^0.23.0",
     "jitter": "^1.3.0",
-    "watchify": "^0.10.1"
+    "json-loader": "^0.5.4",
+    "postcss-short": "^1.4.0",
+    "poststylus": "^0.2.2",
+    "style-loader": "^0.13.0",
+    "stylus-loader": "^1.4.2",
+    "watchify": "^0.10.1",
+    "webpack": "^1.12.9",
+    "webpack-error-notification": "^0.1.5"
   }
 }

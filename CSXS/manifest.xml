@@ -24,7 +24,7 @@
 			<DispatchInfo >
 				<Resources>
 				<MainPath>./panel.html</MainPath>
-				<ScriptPath>./scripts/dist/commands.jsx</ScriptPath>
+				<ScriptPath>./dist/commands.dist.js</ScriptPath>
 				</Resources>
 				<Lifecycle>
 					<AutoVisible>true</AutoVisible>
