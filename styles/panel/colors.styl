@@ -1,0 +1,120 @@
+color_panel_bg(prop = background-color)
+	.dark1 &
+		{prop} #343434
+	.dark2 &
+		{prop} #535353
+	.light1 &
+		{prop} #b8b8b8
+	.light2 &
+		{prop} #d6d6d6
+
+color_text(prop = color)
+	.dark1 &
+		{prop} #cacaca
+	.dark2 &
+		{prop} #ffffff
+	.light1 &
+		{prop} #000000
+	.light2 &
+		{prop} #000000
+
+color_text_shadow(prop = text-shadow)
+	.dark1 &
+		{prop} none
+	.dark2 &
+		{prop} none
+	.light1 &
+		{prop} unquote("0 1px 0.5px #dfdfdf")
+	.light2 &
+		{prop} none
+
+color_text_invert(prop = color)
+	.dark1 &
+		{prop} black
+	.dark2 &
+		{prop} black
+	.light1 &
+		{prop} white
+	.light2 &
+		{prop} white
+
+btn_hover()
+	.dark1 &
+		border-color: #242424
+		box-shadow: 0 1px 0 #464646, inset 0 1px 0 #464646
+		background: linear-gradient(to bottom, lighten(#505050, 10%), lighten(#404040, 1%))
+		color_text_invert()
+
+	.dark2 &
+		border-color: #2a2a2a
+		box-shadow: 0 1px 0 #6a6a6a, inset 0 1px 0 #919191
+		background: linear-gradient(to bottom, lighten(#767676, 10%), lighten(#636363, 1%))
+		color: #111
+
+	.light1 &
+		border-color: #5e5e5e
+		box-shadow: 0 1px 0 #c7c7c7, inset 0 1px 0 #f7f7f7
+		background: linear-gradient(to bottom, lighten(#e7e7e7, 10%), lighten(#bdbdbd, 1%))
+
+	.light2 &
+		border-color: #888888
+		box-shadow: 0 1px 0 #f7f7f7, inset 0 1px 0 #ffffff
+		background: linear-gradient(to bottom, lighten(#e7e7e7, 10%), lighten(#bdbdbd, 1%))
+
+btn_normal()
+	text-decoration: none
+	border: 1px solid #323232
+	box-shadow: none !important
+	border-radius: 3px !important
+	cursor: default
+
+	.dark1 &
+		border-color: #242424
+		box-shadow: 0 1px 0 #464646, inset 0 1px 0 #464646
+		background: linear-gradient(to bottom, #505050, #404040)
+
+	.dark2 &
+		border-color: #2a2a2a
+		box-shadow: 0 1px 0 #6a6a6a, inset 0 1px 0 #919191
+		background: linear-gradient(to bottom, #666, #555)
+		color: #EEE
+
+	.light1 &
+		border-color: #5e5e5e
+		box-shadow: 0 1px 0 #c7c7c7, inset 0 1px 0 #f7f7f7
+		background: linear-gradient(to bottom, #e7e7e7, #bdbdbd)
+
+	.light2 &
+		border-color: #888888
+		box-shadow: 0 1px 0 #f7f7f7, inset 0 1px 0 #ffffff
+		background: linear-gradient(to bottom, #e7e7e7, #bdbdbd)
+
+btn_active()
+	.dark1 &
+		border-color: #242424
+		box-shadow: 0 1px 0 #464646, inset 0 1px 0 #464646
+		background: #333
+		color_text_invert()
+
+	.dark2 &
+		border-color: #2a2a2a
+		box-shadow: 0 1px 0 #6a6a6a, inset 0 1px 0 #919191
+		background: #444
+
+	.light1 &
+		border-color: #5e5e5e
+		box-shadow: 0 1px 0 #c7c7c7, inset 0 1px 0 #f7f7f7
+		background: #BBB
+
+	.light2 &
+		border-color: #888888
+		box-shadow: 0 1px 0 #f7f7f7, inset 0 1px 0 #ffffff
+		background: #BBB
+
+btn()
+	font inherit
+	btn_normal()
+	&:hover
+		btn_hover()
+	&:active
+		btn_active()

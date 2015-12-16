@@ -26,6 +26,7 @@ module.exports = (options) ->
 
 	module:
 		loaders: [
+			{test: /\.(png|gif|jpg)$/, loader: 'url-loader?limit=100000'}
 			{test: /\.coffee$/, loader: 'coffee-loader'}
 			{test: /\.json$/, loader: 'json-loader'}
 			{test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader'}

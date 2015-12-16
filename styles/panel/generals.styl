@@ -1,0 +1,48 @@
+*
+	margin: 0
+	padding: 0
+	box-sizing: border-box
+
+#body
+	overflow: hidden
+	padding-top: 8px
+	position: absolute 0
+
+	color_panel_bg(background-color)
+	color_text(color)
+	color_text_shadow(text-shadow)
+
+	font-family: Tahoma, Helvetica, sans-serif
+	font-size: 10px
+	line-height: row()
+
+	user-select: none
+	cursor: default
+
+.hidden
+	display: none
+
+hr
+	height: 1px
+	margin-bottom: -2px
+	margin-top: 0
+	box-sizing: content-box
+
+	border: none
+	border-bottom: 1px solid
+
+	.dark1 &
+		background-color: #262626
+		border-bottom-color: #484848
+
+	.dark2 &
+		background-color: #383838
+		border-bottom-color: #717171
+
+	.light1 &
+		background-color: #808080
+		border-bottom-color: #cacaca
+
+	.light2 &
+		background-color: #9e9e9e
+		border-bottom-color: #f0f0f0

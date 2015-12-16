@@ -1,0 +1,138 @@
+largeOffsetY = 1px
+largeOffsetX = 1px
+
+mediumOffsetY = 1px
+mediumOffsetX = 1px
+
+.orientation
+	rotator()
+
+	> .n0
+		display: block
+		position: absolute
+		width: 10px
+		height: 10px
+		top: 6px
+		left: 6px
+
+		transition: all 0.21s
+		box-sizing: border-box
+
+		opacity: 0.67
+		z-index: 0
+
+		.size-large &
+			top: 6px + largeOffsetY
+			left: 6px + largeOffsetX
+
+		.size-medium &
+			top: 6px + mediumOffsetY
+			left: 6px + mediumOffsetX
+
+		.dark1 &
+			border: 1px solid #5f5f5f
+		.dark2 &
+			border: 1px solid #777
+		.light1 &
+			border: 1px solid #888
+		.light2 &
+			border: 1px solid #AAA
+
+	.n1, .n2, .n3, .n4
+		display: block
+		position: absolute
+		transition: all 0.21s
+		opacity: 0
+
+		.dark1 &, .dark2 &
+			background: #bbbbbb
+
+		.light1 &, .light2 &
+			background: #222
+
+	.n1
+		width: 1px
+		height: 12px
+		left: 6px
+		top: 5px
+
+		.size-large &
+			left: 6px + largeOffsetX
+			top: 5px + largeOffsetY
+
+		.size-medium &
+			left: 6px + mediumOffsetX
+			top: 5px + mediumOffsetY
+
+	.n2
+		width: 1px
+		height: 12px
+		left: 15px
+		top: 5px
+
+		.size-large &
+			left: 15px + largeOffsetX
+			top: 5px + largeOffsetY
+
+		.size-medium &
+			left: 15px + mediumOffsetX
+			top: 5px + mediumOffsetY
+
+	.n3
+		width: 12px
+		height: 1px
+		left: 5px
+		top: 6px
+
+		.size-large &
+			left: 5px + largeOffsetX
+			top: 6px + largeOffsetY
+
+		.size-medium &
+			left: 5px + mediumOffsetX
+			top: 6px + mediumOffsetY
+
+	.n4
+		width: 12px
+		height: 1px
+		left: 5px
+		top: 15px
+
+		.size-large &
+			left: 5px + largeOffsetX
+			top: 15px + largeOffsetY
+
+		.size-medium &
+			left: 5px + mediumOffsetX
+			top: 15px + mediumOffsetY
+
+	&.vertical
+		> .n1, .n2
+			opacity: 1
+			transform: translateX(0)
+
+		> .n3
+			opacity: 0
+			transform: translateY(10px)
+
+		> .n4
+			opacity: 0
+			transform: translateY(-10px)
+
+	&.horizontal
+		> .n3, .n4
+			opacity: 1
+			transform: translateY(0)
+
+		> .n1
+			opacity: 0
+			transform: translateX(10px)
+
+		> .n2
+			opacity: 0
+			transform: translateX(-10px)
+
+	&.both
+		> .n1, .n2, .n3, .n4
+			opacity: 1
+			transform: translateX(0px)

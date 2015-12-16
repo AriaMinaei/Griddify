@@ -1,0 +1,62 @@
+rotator()
+	el()
+
+	position: relative
+	border-radius: 3px
+	cursor: pointer
+
+	> .thingy
+		display: none
+
+	.size-large &
+		width: 26px !important
+		height: 26px !important
+
+	.size-medium &
+		width: 26px !important
+		height: 26px !important
+
+
+	.dark1 &, .dark2 &
+		border: 1px solid transparent
+		width: 24px
+		height: 24px
+		top: 1px
+
+	.light1 &, .light2 &
+		border: 1px solid transparent
+		width: 24px
+		height: 24px
+
+	.dark1 &
+		border-color: darken(#2e2e2e, 8%)
+		background: #313131
+		&:hover
+			border-color: rgb(3, 3, 3)
+		&:active
+			background: #222
+
+	.dark2 &
+		border-color: lighten(#2e2e2e, 8%)
+		background: #4d4d4d
+		&:hover
+			border-color: darken(#2e2e2e, 16%)
+		&:active
+			background:  #2e2e2e
+
+	.light1 &
+		border-color: #888
+		background: #CECECE
+		&:hover
+			border-color: #555
+		&:active
+			background:  #EEE
+
+	.light2 &
+		border-color: #AAA
+		background: #DEDEDE
+		&:hover
+			border-color: #757575
+		&:active
+			background:  #F2F2F2
+			border-color: #333

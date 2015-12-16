@@ -1,20 +1,21 @@
 Panel = require '../lib/Panel'
+require '../../styles/griddify.styl'
 
 panel = new Panel 'Griddify'
 
 {name, version} = require '../../package.json'
-# alert "hi"
-# panel.updateNotifier.init
 
-# 	name: name
+panel.updateNotifier.init
 
-# 	version: version
+	name: name
 
-# 	channel: "beta"
+	version: version
 
-# 	hub: "http://gelobi.org/griddify/updateHub2/"
+	channel: "beta"
 
-# 	updateUrl: "http://gelobi.org/griddify"
+	hub: "http://gelobi.org/griddify/updateHub2/"
+
+	updateUrl: "http://gelobi.org/griddify"
 
 # This seems to completely mess up with the plugin's cache,
 # so I'm just gonna leave it off for now

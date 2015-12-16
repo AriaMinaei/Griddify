@@ -1,0 +1,55 @@
+.direction
+	rotator()
+
+	> .n1
+		display: block
+		position: absolute
+		width: 7px
+		height: 12px
+		top: 5px
+		left: 8px
+
+		opacity: 0.67
+		transition: all 0.21s
+
+		.dark1 &
+			background url("../images/dark1/direction.png") 0 0 no-repeat
+		.dark2 &
+			background url("../images/dark2/direction.png") 0 0 no-repeat
+		.light1 &
+			background url("../images/light1/direction.png") 0 0 no-repeat
+		.light2 &
+			background url("../images/light2/direction.png") 0 0 no-repeat
+
+		.size-large &
+			top: 6px
+			left: 9px
+
+		.size-medium &
+			top: 6px
+			left: 9px
+
+
+	&.right > .n1
+		transform: rotateZ(0deg) translateZ(1px)
+
+	&.right:hover > .n1
+		transform: rotateZ(20deg) translateZ(1px)
+
+	&.down > .n1
+		transform: rotateZ(90deg) translateZ(1px)
+
+	&.down:hover > .n1
+		transform: rotateZ(110deg) translateZ(1px)
+
+	&.left > .n1
+		transform: rotateZ(180deg) translateZ(1px)
+
+	&.left:hover > .n1
+		transform: rotateZ(200deg) translateZ(1px)
+
+	&.up > .n1
+		transform: rotateZ(270deg) translateZ(1px)
+
+	&.up:hover > .n1
+		transform: rotateZ(290deg) translateZ(1px)
