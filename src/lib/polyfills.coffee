@@ -74,5 +74,4 @@ defineElementGetter(Element.prototype, 'classList', function () {
 
 # String::trim() from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
 unless String::trim?
-
   String::trim = -> @replace /^\s+|\s+$/g, ''

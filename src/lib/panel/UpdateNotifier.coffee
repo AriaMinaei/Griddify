@@ -1,11 +1,9 @@
 semver = require 'semver/semver.js'
 
 module.exports = class UpdateNotifier
-
 	constructor: (@panel) ->
 
 	init: (options) ->
-
 		@name = options.name
 		@version = options.version
 		@hub = options.hub
@@ -15,34 +13,26 @@ module.exports = class UpdateNotifier
 		@request = new XMLHttpRequest
 
 		@request.onreadystatechange = =>
-
 			if @request.readyState is 4
-
 				@_processResult @request.responseText
 
 		@request.open 'GET', @hub, yes
-
 		@request.send null
 
 	_processResult: (response) ->
-
 		json = JSON.parse response
-
 		return unless json.channels? and json.channels[@channel]?
 
 		latestVersionOnChannel = json.channels[@channel]
 
 		# If there is a new version available
 		if semver.gt latestVersionOnChannel, @version
-
 				do @_considerShowingUpdateNotification
 
 	_considerShowingUpdateNotification: ->
-
 		do @_showUpdateNotification
 
 	_showUpdateNotification: ->
-
 		@node = document.createElement 'div'
 		@node.className = "serverNotification visible"
 		document.body.appendChild @node
@@ -62,6 +52,4 @@ module.exports = class UpdateNotifier
 		@closeNode.addEventListener 'click', @_close
 
 	_close: =>
-
 		@node.classList.remove 'visible'
-
