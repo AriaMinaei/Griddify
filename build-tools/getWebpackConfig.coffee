@@ -19,8 +19,6 @@ module.exports = (options) ->
 		new WebpackErrorNotificationPlugin()
 	]
 
-	devtool: if options.env is 'dev' then 'source-map' else null
-
 	resolve:
 		extensions: ['', '.js', '.json', '.coffee']
 

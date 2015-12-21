@@ -1,74 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<script>
-	</script>
-</head>
+<head></head>
 <body id="body">
 
 <div class="container">
-<section>
+	<section>
+		<form action="#griddify">
+		<div>
+			<input type="text" name="spacing" placeholder="Spacing" class="big">
+			<div data-type="rotator" data-options="right, down, left, up" data-name="direction" class="direction"></div>
+			<button class="noMargin fittableButton">Griddify</button>
+		</div>
+		</form>
+		<hr>
+	</section>
 
-	<form action="#griddify">
+	<section>
+		<form action="#divide">
+		<div>
+			<input type="text" name="divisions" placeholder="Divisions" class="big">
+			<div data-type="rotator" data-options="vertical, horizontal, both" data-name="orientation" class="orientation"></div>
+			<button class="fittableButton noMargin">Divide</button>
+		</div>
+		</form>
+		<hr>
+	</section>
 
-	<div>
-
-		<input type="text" name="spacing" placeholder="Spacing" class="big">
-
-		<div data-type="rotator" data-options="right, down, left, up" data-name="direction" class="direction"></div>
-
-		<button class="noMargin fittableButton">Griddify</button>
-
-	</div>
-
-	</form>
-
-	<hr>
-
-</section>
-
-<section>
-
-	<form action="#divide">
-
-	<div>
-
-		<input type="text" name="divisions" placeholder="Divisions" class="big">
-
-		<div data-type="rotator" data-options="vertical, horizontal, both" data-name="orientation" class="orientation"></div>
-
-		<button class="fittableButton noMargin">Divide</button>
-
-	</div>
-
-	</form>
-
-	<hr>
-
-
-</section>
-
-<section>
-
-	<form action="#wrap">
-
-	<div>
-
-		<input type="text" name="spacing" placeholder="Spacing" class="big">
-
-		<div data-type="rotator" data-options="vertical, horizontal, both" data-name="orientation" class="orientation"></div>
-
-		<button class="fittableButton noMargin">Wrap</button>
-
-	</div>
-
-	</form>
-</section>
+	<section>
+		<form action="#wrap">
+		<div>
+			<input type="text" name="spacing" placeholder="Spacing" class="big">
+			<div data-type="rotator" data-options="vertical, horizontal, both" data-name="orientation" class="orientation"></div>
+			<button class="fittableButton noMargin">Wrap</button>
+		</div>
+		</form>
+	</section>
 
 </div>
 
 <script src="./dist/panel.dist.js"></script>
 
 </body>
-
 </html>
