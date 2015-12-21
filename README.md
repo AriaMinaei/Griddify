@@ -1,63 +1,62 @@
 # Griddify
 
-It's a tiny photoshop panel to make guides and grids. Download and see the tutorial [here](http://gelobi.org/griddify).
+It's a tiny photoshop panel to make guides and grids. See the tutorial [here](http://gelobi.org/griddify).
 
-![Preview of Griddify](https://github.com/pixana/griddify/raw/master/docs/images/preview.png)
-
-## Bugs and Feature Requests
-
-Firstly, thank you for wanting to contribute! If you have any features/improvements in mind, or if something isn't working, just open an [issue](./issues).
-
-## Compatibility with CS4/5/6
-
-The CS6 version is ready. Unfortunately, I haven't found the time to familiarize myself with Adobe Flex (apparently, you can develop HTML extensions for older versions of Photoshop using Flex). If you can help me port Griddify to CS versions, please [let me know](./issues/4).
+![Preview of Griddify](https://github.com/AriaMinaei/griddify/raw/master/docs/images/preview.png)
 
 ## Manual Install
 
-If you're having trouble installing Griddify on Photoshop CC 2014, there is a manual installation guide [here](./docs/manual-install.md).
+If you're having trouble installing Griddify on Photoshop CC, there is a manual installation guide [here](./docs/manual-install.md).
 
 ## Development
 
-PRs are more than welcome! Griddify depends on [photoshopjs-core](https://github.com/AriaMinaei/photoshopjs-core) to command photoshop and also on [photoshopjs-panel](https://github.com/AriaMinaei/photoshopjs-panel) to create the interface of the panel. These projects currently only support the requirements of Griddify, and they'll be further developed as we work on Griddify and a couple of other Photoshop panels, which means if you wanna add a feature to Griddify, you probably gonna have to take a look at those too.
+First, there is this thing in CC apps called the "debug mode" that you need to enable in order to develop extensions:
 
-Here, I'll describe how you can develop griddify:
+- In Windows:
+	1. Choose **Run** from the Windows Start menu, and enter `regedit` to open the registry editor.
+	2. Find this key:
+	  - For CC 2014: `HKEY_CURRENT_USER\Software\Adobe\CSXS.5`
+	  - For CC 2015: `HKEY_CURRENT_USER\Software\Adobe\CSXS.6`
+	3. Choose Edit > New > String Value. Enter `PlayerDebugMode` as the Name, and set Data to `1`.
+	4. Close the registry editor.
+- In OSX:
+	1. Find this folder `~/Library/Preferences`
+	2. Find this file:
+	  - For CC 2014: `com.adobe.CSXS.5.plist`
+	  - For CC 2015: `com.adobe.CSXS.6.plist`
+	3. Open the file using an application that can edit Plist files. You can use the XCode Property List editor, or the PlistBuddy command-line tool.
+	4. Change the value of the key `PlayerDebugMode` to `1` to enable debug mode save the file.
+		- If this file is read-only, you must add write permission for the user before you can update it. To do this, right click on the file and select `Get Info > Sharing & Permissions`.
+		- In OSX 10.9 Apple introduced a caching mechanism for property list files. This means that property modifications do not take effect immediately. To force you modification to take effect, open the Terminal application and enter this command: `$ sudo killall cfprefsd`
 
-##### First, the requirements:
+Now that you've enabled "debug mode," you can install Griddify by manually copying it to the place where Adobe extensions are stored:
 
-Beside Photoshop CC, you need to have [ruby](https://www.ruby-lang.org)/[compass](http://compass-style.org) if you want to change the css, and you need nodejs if you wanna change the scripts.
+1. Find the extensions folder:
+	- In Windows:
+		- In Windows 64: `C:\Program Files (x86)\Common Files\Adobe\CEP\extensions\`
+		- In Windows 32: `C:\Program Files\Common Files\Adobe\CEP\extensions\`
+		- In older versions of CC, this folder will be in `C:\Users\AppData\Roaming\Adobe\CEP\extensions\`
+	- In OSX: `/Library/Application Support/Adobe/CEP/extensions/`
+	- **Note**:  The `CEP` folder might be called `CEPServiceManager4` or something similar in older CC versions.
+	- **Noted 2**: If you can find the `CEP` folder, but there is no `extensions` folder inside it, just create it yourself.
+2. Clone the repo and install its dependencies with npm:
 
-##### Preparing the dev environment:
+	```
+	$ git clone git@github.com:AriaMinaei/Griddify.git
+	$ cd griddify
+	$ npm install
+	```
+3. Create a symlink from where you cloned the repo to the extensions folder you located above. In the end, you should be able to see a file named `panel.html` when you navigate to `... CEP/extensions/Griddify`.
+4. Restart Photoshop CC. If all has gone well, you will be able to find the panel in "Window -> Extensions -> Griddify".
 
-Get a clone of the repo and then install with npm:
+#### Watching for cahanges
+
+To watch the files for changes, run:
 ```
-$ git clone https://github.com/pixana/griddify
-$ cd griddify
-$ npm install
+$ npm run dev
 ```
 
-Then, create a symlink from this directory to where you installed griddify:
-* On Mac: ~/Library/Application Support/Adobe/CEPServiceManager4/extensions
-* On Windows: %APPDATA%\Adobe\CEPServiceManager4\extensions (You might have to create the extensions folder)
-
-You also need to enable the debug mode in Adobe applications. Quoting from this [article](http://www.adobe.com/devnet/creativesuite/articles/a-short-guide-to-HTML5-extensions.html):
-
-> * On Mac, open the file ~/Library/Preferences/com.adobe.CSXS.4.plist and add a row with key PlayerDebugMode, of type String, and value 1.
-> * On Windows, open the registry key HKEY_CURRENT_USER/Software/Adobe/CSXS.4 and add a key named PlayerDebugMode, of type String, and value 1.
-
-Now, if everything has worked, when you restart Photoshop CC you should be able to see the panel in the `Window > Extensions` menu.
-
-#### Developing
-
-To watch the files for changes:
-```
-In OSX: (could someone please test this?)
-$ npm run watch
-
-In windows:
-$ npm run winwatch
-```
-
-The extendscript stuff are in the `scripts/coffee/commands` directory and the script for the interface is in `scripts/coffee/panel/panel.coffee`.
+The entry file for ExtendScript commands is `src/commands.coffee`, and the entry file for the interface is  `src/panel/panel.coffee`.
 
 ## License
 
