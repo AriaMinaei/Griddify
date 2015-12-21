@@ -44,10 +44,10 @@ EvalScript_ErrMessage = "EvalScript error.";
  */
 function Version(major, minor, micro, special)
 {
-	this.major = major;
-	this.minor = minor;
-	this.micro = micro;
-	this.special = special;
+  this.major = major;
+  this.minor = minor;
+  this.micro = micro;
+  this.special = special;
 };
 
 /**
@@ -62,15 +62,15 @@ Version.MAX_NUM = 999999999;
  * or exclusive boundary.
  *
  * @param version   The Version object.
- *					@see Version class.
+ *          @see Version class.
  * @param inclusive True if this boundary is inclusive, false if it is exclusive.
  *
  * @return A VersionBound object.
  */
 function VersionBound(version, inclusive)
 {
-	this.version = version;
-	this.inclusive = inclusive;
+  this.version = version;
+  this.inclusive = inclusive;
 };
 
 /**
@@ -84,8 +84,8 @@ function VersionBound(version, inclusive)
  */
 function VersionRange(lowerBound, upperBound)
 {
-	this.lowerBound = lowerBound;
-	this.upperBound = upperBound;
+  this.lowerBound = lowerBound;
+  this.upperBound = upperBound;
 };
 
 /**
@@ -93,68 +93,68 @@ function VersionRange(lowerBound, upperBound)
  * Represents a runtime related to the CSXS infrastructure. Extensions can declare dependencies on particular
  * CSXS runtime versions in the extension manifest.
  *
- * @param name 	  The runtime name.
+ * @param name    The runtime name.
  * @param version The VersionRange object. @see VersionRange.
  *
  * @return A Runtime object.
  */
 function Runtime(name, versionRange)
 {
-	this.name = name;
-	this.versionRange = versionRange;
+  this.name = name;
+  this.versionRange = versionRange;
 };
 
 /**
 * Class Extension.
 * Contains the classes that define data types for the CEP libraries.
 *
-* @param id 					 The unique identifier of this extension.
-* @param name 					 The localizable display name of this extension.
-* @param mainPath 				 The path of the "index.html" file.
-* @param basePath 				 The base path of this extension.
-* @param windowType 			 The window type of the main window of this extension. Valid values are defined by CSXSWindowType. @see CSXSWindowType.
-* @param width 					 The default width in pixels of the main window of this extension.
-* @param height 				 The default height in pixels of the main window of this extension.
-* @param minWidth 				 The minimum width in pixels of the main window of this extension.
-* @param minHeight 				 The minimum height in pixels of the main window of this extension.
-* @param maxWidth 				 The maximum width in pixels of the main window of this extension.
-* @param maxHeight 				 The maximum height in pixels of the main window of this extension.
+* @param id            The unique identifier of this extension.
+* @param name            The localizable display name of this extension.
+* @param mainPath          The path of the "index.html" file.
+* @param basePath          The base path of this extension.
+* @param windowType        The window type of the main window of this extension. Valid values are defined by CSXSWindowType. @see CSXSWindowType.
+* @param width           The default width in pixels of the main window of this extension.
+* @param height          The default height in pixels of the main window of this extension.
+* @param minWidth          The minimum width in pixels of the main window of this extension.
+* @param minHeight         The minimum height in pixels of the main window of this extension.
+* @param maxWidth          The maximum width in pixels of the main window of this extension.
+* @param maxHeight         The maximum height in pixels of the main window of this extension.
 * @param defaultExtensionDataXml The extension data contained in the default ExtensionDispatchInfo section of the extension manifest.
 * @param specialExtensionDataXml The extension data contained in the application-specific ExtensionDispatchInfo section of the extension manifest.
-* @param requiredRuntimeList 	 An array of Runtime objects for runtimes required by this extension. @see VersionRange.
-* @param isAutoVisible 			 True if this extension is visible on loading.
-* @param isPluginExtension 		 True if this extension has been deployed in the Plugins folder of the host application.
+* @param requiredRuntimeList   An array of Runtime objects for runtimes required by this extension. @see VersionRange.
+* @param isAutoVisible       True if this extension is visible on loading.
+* @param isPluginExtension     True if this extension has been deployed in the Plugins folder of the host application.
 *
 * @return An Extension object.
 */
 function Extension(id, name, mainPath, basePath, windowType, width, height, minWidth, minHeight, maxWidth, maxHeight,
-				   defaultExtensionDataXml, specialExtensionDataXml, requiredRuntimeList, isAutoVisible, isPluginExtension)
+           defaultExtensionDataXml, specialExtensionDataXml, requiredRuntimeList, isAutoVisible, isPluginExtension)
 {
-	this.id = id;
-	this.name = name;
-	this.mainPath = mainPath;
-	this.basePath = basePath;
-	this.windowType = windowType;
-	this.width = width;
-	this.height = height;
-	this.minWidth = minWidth;
-	this.minHeight = minHeight;
-	this.maxWidth = maxWidth;
-	this.maxHeight = maxHeight;
-	this.defaultExtensionDataXml = defaultExtensionDataXml;
-	this.specialExtensionDataXml = specialExtensionDataXml;
-	this.requiredRuntimeList = requiredRuntimeList;
-	this.isAutoVisible = isAutoVisible;
-	this.isPluginExtension = isPluginExtension;
+  this.id = id;
+  this.name = name;
+  this.mainPath = mainPath;
+  this.basePath = basePath;
+  this.windowType = windowType;
+  this.width = width;
+  this.height = height;
+  this.minWidth = minWidth;
+  this.minHeight = minHeight;
+  this.maxWidth = maxWidth;
+  this.maxHeight = maxHeight;
+  this.defaultExtensionDataXml = defaultExtensionDataXml;
+  this.specialExtensionDataXml = specialExtensionDataXml;
+  this.requiredRuntimeList = requiredRuntimeList;
+  this.isAutoVisible = isAutoVisible;
+  this.isPluginExtension = isPluginExtension;
 };
 
 /**
  * Class CSEvent.
  * You can use it to dispatch a standard Javascript event.
  *
- * @param type 		  Event type.
- * @param scope 	  The scope of event, can be "GLOBAL" or "APPLICATION".
- * @param appId 	  The unique identifier of the application that generated the event.
+ * @param type      Event type.
+ * @param scope     The scope of event, can be "GLOBAL" or "APPLICATION".
+ * @param appId     The unique identifier of the application that generated the event.
  * @param extensionId The unique identifier of the extension that generated the event.
  *
  * @return CSEvent object
@@ -223,16 +223,16 @@ ColorType.NONE = "none";
  * @param green The green value, in the range [0.0 to 255.0].
  * @param blue  The blue value, in the range [0.0 to 255.0].
  * @param alpha The alpha (transparency) value, in the range [0.0 to 255.0].
- * 		  		The default (255.0) means that the color is fully opaque.
+ *          The default (255.0) means that the color is fully opaque.
  *
  * @return RGBColor object.
  */
 function RGBColor(red, green, blue, alpha)
 {
-	this.red = red;
-	this.green = green;
-	this.blue = blue;
-	this.alpha = alpha;
+  this.red = red;
+  this.green = green;
+  this.blue = blue;
+  this.alpha = alpha;
 };
 
 /**
@@ -246,8 +246,8 @@ function RGBColor(red, green, blue, alpha)
  */
 function Direction(x, y)
 {
-	this.x = x;
-	this.y = y;
+  this.x = x;
+  this.y = y;
 };
 
 /**
@@ -261,31 +261,31 @@ function Direction(x, y)
  */
 function GradientStop(offset, rgbColor)
 {
-	this.offset = offset;
-	this.rgbColor = rgbColor;
+  this.offset = offset;
+  this.rgbColor = rgbColor;
 };
 
 /**
  * Class GradientColor
  * Stores gradient color information.
  *
- * @param type 		 	   The gradient type, the only valid value is "linear".
- * @param direction 	   A vector describing the direction of the gradient.
- *						   A point value, in which the y component is 0 and the x component
- *						   is positive or negative for a right or left direction,
- * 						   or the x component is 0 and the y component is positive or negative for
- *						   an up or down direction. @see Direction.
- * @param numStops  	   The number of stops.
+ * @param type         The gradient type, the only valid value is "linear".
+ * @param direction      A vector describing the direction of the gradient.
+ *               A point value, in which the y component is 0 and the x component
+ *               is positive or negative for a right or left direction,
+ *               or the x component is 0 and the y component is positive or negative for
+ *               an up or down direction. @see Direction.
+ * @param numStops       The number of stops.
  * @param gradientStopList An array of GradientStop objects. @see GradientStop.
  *
  * @return GradientColor object.
  */
 function GradientColor(type, direction, numStops, arrGradientStop)
 {
-	this.type = type;
-	this.direction = direction;
-	this.numStops = numStops;
-	this.arrGradientStop = arrGradientStop;
+  this.type = type;
+  this.direction = direction;
+  this.numStops = numStops;
+  this.arrGradientStop = arrGradientStop;
 };
 
 /**
@@ -293,28 +293,28 @@ function GradientColor(type, direction, numStops, arrGradientStop)
  * Stores color information, including the type, anti-alias level, and specific color
  * values in a color object of an appropriate type.
  *
- * @param type 			 The color type constant, 1 for "rgb" and 2 for "gradient".
+ * @param type       The color type constant, 1 for "rgb" and 2 for "gradient".
  * @param antialiasLevel The anti-alias level constant.
- * @param color 		 A GradientColor object or a RGBColor containing specific color information.
- *						 The type of color object depends on type parameter. @see GradientColor and RGBColor.
+ * @param color      A GradientColor object or a RGBColor containing specific color information.
+ *             The type of color object depends on type parameter. @see GradientColor and RGBColor.
  *
  * @return UIColor object.
  */
 function UIColor(type, antialiasLevel, color)
 {
-	this.type = type;
-	this.antialiasLevel = antialiasLevel;
-	this.color = color;
+  this.type = type;
+  this.antialiasLevel = antialiasLevel;
+  this.color = color;
 };
 
 /**
  * Class AppSkinInfo
  * Stores window-skin properties, such as color and font. All parameters' type are UIColor. @see UIColor.
  *
- * @param baseFontFamily 			The base font family of the application.
- * @param baseFontSize 				The base font size of the application.
- * @param appBarBackgroundColor 	The application bar background color.
- * @param panelBackgroundColor 		The background color of the extension panel.
+ * @param baseFontFamily      The base font family of the application.
+ * @param baseFontSize        The base font size of the application.
+ * @param appBarBackgroundColor   The application bar background color.
+ * @param panelBackgroundColor    The background color of the extension panel.
  * @param appBarBackgroundColorSRGB The application bar background color, as sRGB.
  * @param panelBackgroundColorSRGB  The background color of the extension panel, as sRGB.
  * @param systemHighlightColor      The operating-system highlight color, as sRGB.
@@ -323,23 +323,23 @@ function UIColor(type, antialiasLevel, color)
  */
 function AppSkinInfo(baseFontFamily, baseFontSize, appBarBackgroundColor, panelBackgroundColor, appBarBackgroundColorSRGB, panelBackgroundColorSRGB, systemHighlightColor)
 {
-	this.baseFontFamily = baseFontFamily;
-	this.baseFontSize = baseFontSize;
-	this.appBarBackgroundColor = appBarBackgroundColor;
-	this.panelBackgroundColor = panelBackgroundColor;
-	this.appBarBackgroundColorSRGB = appBarBackgroundColorSRGB;
-	this.panelBackgroundColorSRGB = panelBackgroundColorSRGB;
-	this.systemHighlightColor = systemHighlightColor;
+  this.baseFontFamily = baseFontFamily;
+  this.baseFontSize = baseFontSize;
+  this.appBarBackgroundColor = appBarBackgroundColor;
+  this.panelBackgroundColor = panelBackgroundColor;
+  this.appBarBackgroundColorSRGB = appBarBackgroundColorSRGB;
+  this.panelBackgroundColorSRGB = panelBackgroundColorSRGB;
+  this.systemHighlightColor = systemHighlightColor;
 };
 
 /**
  * Class HostEnvironment
  * Stores information about the environment in which the extension is loaded.
  *
- * @param appName 	   The application's name.
+ * @param appName      The application's name.
  * @param appVersion   The application's version.
  * @param appLocale    The application's current license locale.
- * @param appId 	   The application's unique identifier.
+ * @param appId      The application's unique identifier.
  * @param isAppOffline True if the application is currently offline.
  * @param appSkinInfo  A skin-information object containing the application's default color and font styles. @see AppSkinInfo.
  * @param appUILocale  The application's current UI locale.
@@ -348,13 +348,13 @@ function AppSkinInfo(baseFontFamily, baseFontSize, appBarBackgroundColor, panelB
  */
 function HostEnvironment(appName, appVersion, appLocale, appUILocale, appId, isAppOffline, appSkinInfo)
 {
-	this.appName = appName;
-	this.appVersion = appVersion;
-	this.appLocale = appLocale;
-	this.appUILocale = appUILocale;
-	this.appId = appId;
-	this.isAppOffline = isAppOffline;
-	this.appSkinInfo = appSkinInfo;
+  this.appName = appName;
+  this.appVersion = appVersion;
+  this.appLocale = appLocale;
+  this.appUILocale = appUILocale;
+  this.appId = appId;
+  this.isAppOffline = isAppOffline;
+  this.appSkinInfo = appSkinInfo;
 };
 
 /***********************************************************************************/
@@ -378,10 +378,10 @@ function CSInterface()
  * // event is a CSEvent object, but user can ignore it.
  * function OnAppThemeColorChanged(event)
  * {
- *	  // Should get a latest HostEnvironment object from application.
- *	  var skinInfo = JSON.parse(window.__adobe_cep__.getHostEnvironment()).appSkinInfo;
+ *    // Should get a latest HostEnvironment object from application.
+ *    var skinInfo = JSON.parse(window.__adobe_cep__.getHostEnvironment()).appSkinInfo;
  *    // Gets the style information such as color info from the skinInfo,
- *	  // and redraw all UI controls of your extension according to the style info.
+ *    // and redraw all UI controls of your extension according to the style info.
  * }
  */
 CSInterface.THEME_COLOR_CHANGED_EVENT = "com.adobe.csxs.events.ThemeColorChanged";
@@ -392,28 +392,28 @@ CSInterface.prototype.hostEnvironment = JSON.parse(window.__adobe_cep__.getHostE
 /** Close the current extension **/
 CSInterface.prototype.closeExtension = function()
 {
-	window.__adobe_cep__.closeExtension();
+  window.__adobe_cep__.closeExtension();
 };
 
 /**
  * Get system path.
  *
  * @param pathType A string containing a path-type constant defined in the SystemPath class,
- * 		           such as SystemPath.USER_DATA.
+ *               such as SystemPath.USER_DATA.
  * @return path string
  */
 CSInterface.prototype.getSystemPath = function(pathType)
 {
-	var path = decodeURI(window.__adobe_cep__.getSystemPath(pathType));
-	var OSVersion = this.getOSInformation();
-	if (OSVersion.indexOf("Windows") >= 0)
-	{
-	  path = path.replace("file:///", "");
-	}
-	else if (OSVersion.indexOf("Mac") >= 0)
-	{
-	  path = path.replace("file://", "");
-	}
+  var path = decodeURI(window.__adobe_cep__.getSystemPath(pathType));
+  var OSVersion = this.getOSInformation();
+  if (OSVersion.indexOf("Windows") >= 0)
+  {
+    path = path.replace("file:///", "");
+  }
+  else if (OSVersion.indexOf("Mac") >= 0)
+  {
+    path = path.replace("file://", "");
+  }
     return path;
 };
 
@@ -422,7 +422,7 @@ CSInterface.prototype.getSystemPath = function(pathType)
  *
  * @param script   The raw JavaScript.
  * @param callback The callback function that receives the execution result of the script. This parameter is optional.
- * 				   If it fails to execute the script, the callback function will receive the error message EvalScript_ErrMessage.
+ *           If it fails to execute the script, the callback function will receive the error message EvalScript_ErrMessage.
  */
 CSInterface.prototype.evalScript = function(script, callback)
 {
@@ -476,8 +476,8 @@ CSInterface.prototype.dispatchEvent = function(event)
  * @param type     The Event type
  * @param listener The JavaScript function that receives a notification when
  *                 a CS event of the specified type occurs.
- * @param obj 	   The object that listener belongs to. Use it when listener is a method
- *				   of an object. This parameter is optional and its default value is null.
+ * @param obj      The object that listener belongs to. Use it when listener is a method
+ *           of an object. This parameter is optional and its default value is null.
  */
 CSInterface.prototype.addEventListener = function(type, listener, obj)
 {
@@ -490,8 +490,8 @@ CSInterface.prototype.addEventListener = function(type, listener, obj)
  * @param type event type
  * @param listener The JavaScript function that receives a notification when
  *                 a CS event of the specified type occurs.
- * @param obj 	   The object that listener belongs to. Use it when listener is a method
- *				   of an object. This parameter is optional and its default value is null.
+ * @param obj      The object that listener belongs to. Use it when listener is a method
+ *           of an object. This parameter is optional and its default value is null.
  */
 CSInterface.prototype.removeEventListener = function(type, listener, obj)
 {
@@ -503,8 +503,8 @@ CSInterface.prototype.removeEventListener = function(type, listener, obj)
  *
  * @param extensionId   The extension's unique identifier.
  * @param startupParams Startup parameters to be passed to the loaded extension.
- * 	 					Specify key-value pairs as a GET URL parameter list; for example: "key1=value1&amp;key2=value2".
- *						Currently this parameter is not supported by CEP, so it will always be "" for now.
+ *            Specify key-value pairs as a GET URL parameter list; for example: "key1=value1&amp;key2=value2".
+ *            Currently this parameter is not supported by CEP, so it will always be "" for now.
  *
  * @example
  * To launch the extension "help" with ID "HLP" from this extension, call:
@@ -513,7 +513,7 @@ CSInterface.prototype.removeEventListener = function(type, listener, obj)
  */
 CSInterface.prototype.requestOpenExtension = function(extensionId, params)
 {
-	window.__adobe_cep__.requestOpenExtension(extensionId, params);
+  window.__adobe_cep__.requestOpenExtension(extensionId, params);
 };
 
 /**
@@ -521,17 +521,17 @@ CSInterface.prototype.requestOpenExtension = function(extensionId, params)
  * The extension list is initialized once, and remains the same during the lifetime of the CSXS session.
  *
  * @param extensionIds An array of unique identifiers for extensions of interest.
- * 					   If omitted, retrieves data for all extensions.
+ *             If omitted, retrieves data for all extensions.
  *
  * @return An Extension object.
  */
 CSInterface.prototype.getExtensions = function(extensionIds)
 {
-	var extensionIdsStr = JSON.stringify(extensionIds);
-	var extensionsStr = window.__adobe_cep__.getExtensions(extensionIdsStr);
+  var extensionIdsStr = JSON.stringify(extensionIds);
+  var extensionsStr = window.__adobe_cep__.getExtensions(extensionIdsStr);
 
-	var extensions = JSON.parse(extensionsStr);
-	return extensions;
+  var extensions = JSON.parse(extensionsStr);
+  return extensions;
 };
 
 /**
@@ -541,10 +541,10 @@ CSInterface.prototype.getExtensions = function(extensionIds)
  */
 CSInterface.prototype.getNetworkPreferences = function()
 {
-	var result = window.__adobe_cep__.getNetworkPreferences();
-	var networkPre = JSON.parse(result);
+  var result = window.__adobe_cep__.getNetworkPreferences();
+  var networkPre = JSON.parse(result);
 
-	return networkPre;
+  return networkPre;
 };
 
 /**
@@ -553,7 +553,7 @@ CSInterface.prototype.getNetworkPreferences = function()
  *
  *  key1=value1
  *  key2=value2
- *	key3.value=value3
+ *  key3.value=value3
  *
  * The property file should be placed in its corresponding locale folder. For example for en_US, the property file would be placed in YourExtension/locale/en_US/messages.properties.
  * Users can define a default property file, placed in "YourExtension/locale/" which will be used when the corresponding locale file is not defined.
@@ -562,56 +562,56 @@ CSInterface.prototype.getNetworkPreferences = function()
  *
  * For example:
  *
- *	<input type="submit" value="" data-locale="key3"/>
- *	<script type="text/javascript">
- *		var cs = new CSInterface();
- *		// Get properties according to current locale of host application.
- *		var resourceBundle = cs.initResourceBundle();
- *		// Refer the locale string.
- *		document.write(resourceBundle.key1);
- *		document.write(resourceBundle.key2);
- *	</script>
+ *  <input type="submit" value="" data-locale="key3"/>
+ *  <script type="text/javascript">
+ *    var cs = new CSInterface();
+ *    // Get properties according to current locale of host application.
+ *    var resourceBundle = cs.initResourceBundle();
+ *    // Refer the locale string.
+ *    document.write(resourceBundle.key1);
+ *    document.write(resourceBundle.key2);
+ *  </script>
  *
  * @return An object containing the resource bundle information.
  */
 CSInterface.prototype.initResourceBundle = function()
 {
-	var resourceBundle = JSON.parse(window.__adobe_cep__.initResourceBundle());
-	var resElms = document.querySelectorAll('[data-locale]');
-	for (var n = 0; n < resElms.length; n++)
-	{
-	   var resEl = resElms[n];
-	   // Get the resource key from the element.
-	   var resKey = resEl.getAttribute('data-locale');
-	   if (resKey)
-	   {
-		   // Get all the resources that start with the key.
-		   for (var key in resourceBundle)
-		   {
-			   if (key.indexOf(resKey) == 0)
-			   {
-				   var resValue = resourceBundle[key];
-				   if (key.indexOf('.') == -1)
-				   {
-					   // No dot notation in resource key,
-					   // assign the resource value to the element's
-					   // innerHTML.
-					   resEl.innerHTML = resValue;
-				   }
-				   else
-				   {
-					   // Dot notation in resource key, assign the
-					   // resource value to the element's property
-					   // whose name corresponds to the substring
-					   // after the dot.
-					   var attrKey = key.substring(key.indexOf('.') + 1);
-					   resEl[attrKey] = resValue;
-				   }
-			   }
-		   }
-	   }
-	}
-	return resourceBundle;
+  var resourceBundle = JSON.parse(window.__adobe_cep__.initResourceBundle());
+  var resElms = document.querySelectorAll('[data-locale]');
+  for (var n = 0; n < resElms.length; n++)
+  {
+     var resEl = resElms[n];
+     // Get the resource key from the element.
+     var resKey = resEl.getAttribute('data-locale');
+     if (resKey)
+     {
+       // Get all the resources that start with the key.
+       for (var key in resourceBundle)
+       {
+         if (key.indexOf(resKey) == 0)
+         {
+           var resValue = resourceBundle[key];
+           if (key.indexOf('.') == -1)
+           {
+             // No dot notation in resource key,
+             // assign the resource value to the element's
+             // innerHTML.
+             resEl.innerHTML = resValue;
+           }
+           else
+           {
+             // Dot notation in resource key, assign the
+             // resource value to the element's property
+             // whose name corresponds to the substring
+             // after the dot.
+             var attrKey = key.substring(key.indexOf('.') + 1);
+             resEl[attrKey] = resValue;
+           }
+         }
+       }
+     }
+  }
+  return resourceBundle;
 };
 
 /**
@@ -621,7 +621,7 @@ CSInterface.prototype.initResourceBundle = function()
  */
 CSInterface.prototype.dumpInstallationInfo = function()
 {
-	return window.__adobe_cep__.dumpInstallationInfo();
+  return window.__adobe_cep__.dumpInstallationInfo();
 };
 
 /**
@@ -674,10 +674,10 @@ CSInterface.prototype.getOSInformation = function()
     {
         var agentStr = new String();
         agentStr = userAgent;
-		var verLength = agentStr.indexOf(")") - agentStr.indexOf("Mac OS X");
-		var verStr = agentStr.substr(agentStr.indexOf("Mac OS X"), verLength);
-		var result = verStr.replace("_", ".");
-		result = result.replace("_", ".");
+    var verLength = agentStr.indexOf(")") - agentStr.indexOf("Mac OS X");
+    var verStr = agentStr.substr(agentStr.indexOf("Mac OS X"), verLength);
+    var result = verStr.replace("_", ".");
+    result = result.replace("_", ".");
         return result;
     }
 

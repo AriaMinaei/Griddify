@@ -2,86 +2,86 @@ parseDivisions = require './divide/parseDivisions'
 _ = require 'photoshopjs-core'
 
 module.exports = divide = (orientation, divisions) ->
-	unless orientation in ['vertical', 'horizontal', 'both']
-		throw Error "orientation '#{orientation}' isn't in ['vertical', 'horizontal', 'both']"
+  unless orientation in ['vertical', 'horizontal', 'both']
+    throw Error "orientation '#{orientation}' isn't in ['vertical', 'horizontal', 'both']"
 
-	{divisions, gutters} = parseDivisions divisions
-	doc = _.docs.active
+  {divisions, gutters} = parseDivisions divisions
+  doc = _.docs.active
 
-	try
-		domDoc = doc.asDom()
-	catch
-		throw Error "No document seems to be open"
+  try
+    domDoc = doc.asDom()
+  catch
+    throw Error "No document seems to be open"
 
-	try
-		bounds = domDoc.selection.bounds
-	catch
-		bounds = [0, 0, domDoc.width, domDoc.height]
+  try
+    bounds = domDoc.selection.bounds
+  catch
+    bounds = [0, 0, domDoc.width, domDoc.height]
 
-	for b, i in bounds
-		if b instanceof UnitValue
-			bounds[i] = b.value
+  for b, i in bounds
+    if b instanceof UnitValue
+      bounds[i] = b.value
 
-	vertical = ->
-		from = bounds[0]
-		to = bounds[2]
-		method = 'addVertical'
+  vertical = ->
+    from = bounds[0]
+    to = bounds[2]
+    method = 'addVertical'
 
-		addSeries from, to, method
+    addSeries from, to, method
 
-	horizontal = ->
-		from = bounds[1]
-		to = bounds[3]
-		method = 'addHorizontal'
+  horizontal = ->
+    from = bounds[1]
+    to = bounds[3]
+    method = 'addHorizontal'
 
-		addSeries from, to, method
+    addSeries from, to, method
 
-	addSeries = (from, to, method) ->
-		len = to - from
-		piece = len / (divisions)
-		cur = from
+  addSeries = (from, to, method) ->
+    len = to - from
+    piece = len / (divisions)
+    cur = from
 
-		for i in [1...divisions]
-			cur += piece
-			addSingle cur, method
+    for i in [1...divisions]
+      cur += piece
+      addSingle cur, method
 
-		return
+    return
 
-	addSingle = (at, method) ->
-		for p in positions
-			doc.guides[method] p + at
+  addSingle = (at, method) ->
+    for p in positions
+      doc.guides[method] p + at
 
-		return
+    return
 
-	positions = []
+  positions = []
 
-	do ->
-		if gutters.length is 0
-			positions.push 0
-			return
+  do ->
+    if gutters.length is 0
+      positions.push 0
+      return
 
-		absolutes = [0]
-		cur = 0
+    absolutes = [0]
+    cur = 0
 
-		for g in gutters
-			cur += g
-			absolutes.push cur
+    for g in gutters
+      cur += g
+      absolutes.push cur
 
-		len = cur
-		for p in absolutes
-			positions.push p - (len / 2)
+    len = cur
+    for p in absolutes
+      positions.push p - (len / 2)
 
-		return
+    return
 
-	if orientation is 'vertical'
-		do vertical
-	else if orientation is 'horizontal'
-		do horizontal
-	else
-		do vertical
-		do horizontal
+  if orientation is 'vertical'
+    do vertical
+  else if orientation is 'horizontal'
+    do horizontal
+  else
+    do vertical
+    do horizontal
 
-	return
+  return
 
 _.panel 'divide', (args) ->
-	divide args.orientation, args.divisions
+  divide args.orientation, args.divisions
