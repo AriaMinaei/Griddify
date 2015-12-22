@@ -1,6 +1,6 @@
 # Installing Griddify manually
 
-Some people have been having trouble installing Griddify on Photoshop CC. So here is an alternative way to install Griddify on CC which should hopefully work for everyone.
+Some users have been having trouble installing Griddify on Photoshop CC. So here is an alternative way to install the panel on CC which should hopefully work for everyone.
 
 Here goes:
 
